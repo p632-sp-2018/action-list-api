@@ -1,0 +1,10 @@
+language: java
+group: stable
+jdk:
+- oraclejdk8
+script: mvn clean verify
+script: mvn checkstyle:checkstyle
+# git strips the wrapper jar file so we have to force its download during the build
+install:
+- mvn -N io.takari:maven:wrapper
+- ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V

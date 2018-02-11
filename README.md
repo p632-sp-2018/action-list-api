@@ -1,1 +1,1 @@
-# Action List API
+# Action List API [![Build Status](https://travis-ci.org/p632-sp-2018/action-list-api.svg?branch=master)](https://travis-ci.org/p632-sp-2018/action-list-api) [![Code Climate](https://codeclimate.com/github/p632-sp-2018/action-list-api/badges/gpa.svg)](https://codeclimate.com/github/p632-sp-2018/action-list-api)

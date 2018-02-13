@@ -2,10 +2,7 @@
 -- version 4.4.15.10
 -- https://www.phpmyadmin.net
 --
--- Host: db.soic.indiana.edu
 -- Generation Time: Feb 13, 2018 at 12:25 AM
--- Server version: 5.5.56-MariaDB
--- PHP Version: 5.4.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -15,10 +12,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `p565f17_spanchal`
---
 
 -- --------------------------------------------------------
 

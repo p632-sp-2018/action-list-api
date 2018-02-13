@@ -1,0 +1,69 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.15.10
+-- https://www.phpmyadmin.net
+--
+-- Host: db.soic.indiana.edu
+-- Generation Time: Feb 13, 2018 at 12:25 AM
+-- Server version: 5.5.56-MariaDB
+-- PHP Version: 5.4.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `p565f17_spanchal`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `KREW_ACTN_ITM_T`
+--
+
+DROP TABLE IF EXISTS `KREW_ACTN_ITM_T`;
+CREATE TABLE IF NOT EXISTS `KREW_ACTN_ITM_T` (
+  `ACTN_ITM_ID` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `PRNCPL_ID` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ASND_DT` datetime NOT NULL,
+  `RQST_CD` char(1) COLLATE utf8_bin NOT NULL,
+  `ACTN_RQST_ID` varchar(40) COLLATE utf8_bin NOT NULL,
+  `DOC_HDR_ID` varchar(40) COLLATE utf8_bin NOT NULL,
+  `ROLE_NM` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `DLGN_PRNCPL_ID` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `DOC_HDR_TTL` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `DOC_TYP_LBL` varchar(128) COLLATE utf8_bin NOT NULL,
+  `DOC_HDLR_URL` varchar(255) COLLATE utf8_bin NOT NULL,
+  `DOC_TYP_NM` varchar(64) COLLATE utf8_bin NOT NULL,
+  `RSP_ID` varchar(40) COLLATE utf8_bin NOT NULL,
+  `DLGN_TYP` varchar(1) COLLATE utf8_bin DEFAULT NULL,
+  `VER_NBR` decimal(8,0) DEFAULT '0',
+  `DTYPE` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `GRP_ID` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `DLGN_GRP_ID` varchar(40) COLLATE utf8_bin DEFAULT NULL,
+  `RQST_LBL` varchar(255) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `KREW_ACTN_ITM_T`
+--
+ALTER TABLE `KREW_ACTN_ITM_T`
+  ADD PRIMARY KEY (`ACTN_ITM_ID`),
+  ADD KEY `KREW_ACTN_ITM_T1` (`PRNCPL_ID`),
+  ADD KEY `KREW_ACTN_ITM_TI2` (`DOC_HDR_ID`),
+  ADD KEY `KREW_ACTN_ITM_TI3` (`ACTN_RQST_ID`),
+  ADD KEY `KREW_ACTN_ITM_TI5` (`PRNCPL_ID`,`DLGN_TYP`,`DOC_HDR_ID`),
+  ADD KEY `KREW_ACTN_ITM_TI6` (`DLGN_TYP`,`DLGN_PRNCPL_ID`,`DLGN_GRP_ID`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

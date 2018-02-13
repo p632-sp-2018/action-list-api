@@ -14,3 +14,4 @@ tmp
 *.jar
 mvnw
 maven-wrapper.properties
+application.properties

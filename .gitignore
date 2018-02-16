@@ -14,4 +14,7 @@ tmp
 *.jar
 mvnw
 maven-wrapper.properties
-application.properties
+/application.properties
+.factorypath
+/bin/
+

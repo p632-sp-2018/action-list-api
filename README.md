@@ -22,7 +22,7 @@ To get the project up and running on local machine follow the steps mentioned [h
 
 ## Contributing
 
-Read CONTRIBUTING.md for detailed description of the workflow.
+Read [CONTRIBUTING.md](https://github.com/p632-sp-2018/action-list-api/blob/master/CONTRIBUTING.md) for detailed description of the workflow.
 
 ## Contributors
 

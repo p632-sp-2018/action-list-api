@@ -1,0 +1,12 @@
+type KrewActnItmT{
+	actnItmId :ID! 
+	docTypLbl : String
+	docHdrTtl : String
+	docHdrId : String! 
+}
+
+type Query {
+	findAllKrewActnItmT : [KrewActnItmT]
+	findKrewActnItmT(id: String):KrewActnItmT!
+	pageKrewActnItmT(limit: Int!, offset: Int! ):[KrewActnItmT]
+}

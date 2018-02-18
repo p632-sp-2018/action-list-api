@@ -8,3 +8,18 @@ script: mvn checkstyle:checkstyle
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+machine:
+  environment:
+    CC_TEST_REPORTER_ID: 96ae089d0a21104da1c39f0c0fd272b22a763c132e328a215cd90689f735eee2
+    
+dependencies:
+  post:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+
+test:
+  pre:
+    - ./cc-test-reporter before-build
+
+  post:
+    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

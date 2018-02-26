@@ -3,6 +3,7 @@ type KrewActnItmT{
 	docTypLbl : String
 	docHdrTtl : String
 	docHdrId : String! 
+	rqstLbl : String
 }
 
 type Query {

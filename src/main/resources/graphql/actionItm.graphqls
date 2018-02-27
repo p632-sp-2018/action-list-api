@@ -1,8 +1,17 @@
 type KrewActnItmT{
-	actnItmId :ID! 
-	docTypLbl : String
-	docHdrTtl : String
-	docHdrId : String! 
+	id :ID! 
+	documentTypeLabel : String!
+	title : String
+	documentId : String!
+	actionRequestId: String!
+	delegationType: String
+	documentUrl: String!
+	documentTypeName: String!
+	roleName: String
+	requestCode: String!
+	requestLabel: String!
+	responsibilityId: String!
+	routeLogUrl: String!
 }
 
 type Query {

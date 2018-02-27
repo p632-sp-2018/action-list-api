@@ -18,14 +18,14 @@ public class KrewActnItmT implements Serializable {
 
 	@Id
 	@Column(name="ACTN_ITM_ID", unique=true, nullable=false, length=40)
-	private String actnItmId;
+	private String id;
 
 	@Column(name="ACTN_RQST_ID", nullable=false, length=40)
-	private String actnRqstId;
+	private String actionRequestId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ASND_DT", nullable=false)
-	private Date asndDt;
+	private Date creationDate;
 
 	@Column(name="DLGN_GRP_ID", length=40)
 	private String dlgnGrpId;
@@ -34,22 +34,22 @@ public class KrewActnItmT implements Serializable {
 	private String dlgnPrncplId;
 
 	@Column(name="DLGN_TYP", length=1)
-	private String dlgnTyp;
+	private String delegationType;
 
 	@Column(name="DOC_HDLR_URL", nullable=false, length=255)
-	private String docHdlrUrl;
+	private String documentUrl;
 
 	@Column(name="DOC_HDR_ID", nullable=false, length=40)
-	private String docHdrId;
+	private String documentId;
 
 	@Column(name="DOC_HDR_TTL", length=255)
-	private String docHdrTtl;
+	private String title;
 
 	@Column(name="DOC_TYP_LBL", nullable=false, length=128)
-	private String docTypLbl;
+	private String documentTypeLabel;
 
 	@Column(name="DOC_TYP_NM", nullable=false, length=64)
-	private String docTypNm;
+	private String documentTypeName;
 
 	@Column(length=50)
 	private String dtype;
@@ -61,16 +61,16 @@ public class KrewActnItmT implements Serializable {
 	private String prncplId;
 
 	@Column(name="ROLE_NM", length=2000)
-	private String roleNm;
+	private String roleName;
 
 	@Column(name="RQST_CD", nullable=false, length=1)
-	private String rqstCd;
+	private String requestCode;
 
 	@Column(name="RQST_LBL", length=255)
 	private String rqstLbl;
 
 	@Column(name="RSP_ID", nullable=false, length=40)
-	private String rspId;
+	private String responsibilityId;
 
 	@Column(name="VER_NBR", precision=10)
 	private BigDecimal verNbr;
@@ -78,28 +78,28 @@ public class KrewActnItmT implements Serializable {
 	public KrewActnItmT() {
 	}
 
-	public String getActnItmId() {
-		return this.actnItmId;
+	public String getId() {
+		return this.id;
 	}
 
-	public void setActnItmId(String actnItmId) {
-		this.actnItmId = actnItmId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getActnRqstId() {
-		return this.actnRqstId;
+	public String getActionRequestId() {
+		return this.actionRequestId;
 	}
 
-	public void setActnRqstId(String actnRqstId) {
-		this.actnRqstId = actnRqstId;
+	public void setActionRequestId(String actionRequestId) {
+		this.actionRequestId = actionRequestId;
 	}
 
-	public Date getAsndDt() {
-		return this.asndDt;
+	public Date getCreationDate() {
+		return this.creationDate;
 	}
 
-	public void setAsndDt(Date asndDt) {
-		this.asndDt = asndDt;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getDlgnGrpId() {
@@ -118,52 +118,52 @@ public class KrewActnItmT implements Serializable {
 		this.dlgnPrncplId = dlgnPrncplId;
 	}
 
-	public String getDlgnTyp() {
-		return this.dlgnTyp;
+	public String getDelegationType() {
+		return this.delegationType;
 	}
 
-	public void setDlgnTyp(String dlgnTyp) {
-		this.dlgnTyp = dlgnTyp;
+	public void setDelegationType(String delegationType) {
+		this.delegationType = delegationType;
 	}
 
-	public String getDocHdlrUrl() {
-		return this.docHdlrUrl;
+	public String getDocumentUrl() {
+		return this.documentUrl;
 	}
 
-	public void setDocHdlrUrl(String docHdlrUrl) {
-		this.docHdlrUrl = docHdlrUrl;
+	public void setDocumentUrl(String documentUrl) {
+		this.documentUrl = documentUrl;
 	}
 
-	public String getDocHdrId() {
-		return this.docHdrId;
+	public String getDocumentId() {
+		return this.documentId;
 	}
 
-	public void setDocHdrId(String docHdrId) {
-		this.docHdrId = docHdrId;
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
 	}
 
-	public String getDocHdrTtl() {
-		return this.docHdrTtl;
+	public String getTitle() {
+		return this.title;
 	}
 
-	public void setDocHdrTtl(String docHdrTtl) {
-		this.docHdrTtl = docHdrTtl;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getDocTypLbl() {
-		return this.docTypLbl;
+	public String getDocumentTypeLabel() {
+		return this.documentTypeLabel;
 	}
 
-	public void setDocTypLbl(String docTypLbl) {
-		this.docTypLbl = docTypLbl;
+	public void setDocumentTypeLabel(String documentTypeLabel) {
+		this.documentTypeLabel = documentTypeLabel;
 	}
 
-	public String getDocTypNm() {
-		return this.docTypNm;
+	public String getDocumentTypeName() {
+		return this.documentTypeName;
 	}
 
-	public void setDocTypNm(String docTypNm) {
-		this.docTypNm = docTypNm;
+	public void setDocumentTypeName(String documentTypeName) {
+		this.documentTypeName = documentTypeName;
 	}
 
 	public String getDtype() {
@@ -190,20 +190,20 @@ public class KrewActnItmT implements Serializable {
 		this.prncplId = prncplId;
 	}
 
-	public String getRoleNm() {
-		return this.roleNm;
+	public String getRoleName() {
+		return this.roleName;
 	}
 
-	public void setRoleNm(String roleNm) {
-		this.roleNm = roleNm;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
-	public String getRqstCd() {
-		return this.rqstCd;
+	public String getRequestCode() {
+		return this.requestCode;
 	}
 
-	public void setRqstCd(String rqstCd) {
-		this.rqstCd = rqstCd;
+	public void setRequestCode(String requestCode) {
+		this.requestCode = requestCode;
 	}
 
 	public String getRqstLbl() {
@@ -214,12 +214,12 @@ public class KrewActnItmT implements Serializable {
 		this.rqstLbl = rqstLbl;
 	}
 
-	public String getRspId() {
-		return this.rspId;
+	public String getResponsibilityId() {
+		return this.responsibilityId;
 	}
 
-	public void setRspId(String rspId) {
-		this.rspId = rspId;
+	public void setResponsibilityId(String responsibilityId) {
+		this.responsibilityId = responsibilityId;
 	}
 
 	public BigDecimal getVerNbr() {

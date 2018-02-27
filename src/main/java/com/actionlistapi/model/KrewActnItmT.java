@@ -67,13 +67,16 @@ public class KrewActnItmT implements Serializable {
 	private String requestCode;
 
 	@Column(name="RQST_LBL", length=255)
-	private String rqstLbl;
+	private String requestLabel;
 
 	@Column(name="RSP_ID", nullable=false, length=40)
 	private String responsibilityId;
 
 	@Column(name="VER_NBR", precision=10)
 	private BigDecimal verNbr;
+	
+	@Transient
+	private String routeLogUrl;
 
 	public KrewActnItmT() {
 	}
@@ -206,12 +209,12 @@ public class KrewActnItmT implements Serializable {
 		this.requestCode = requestCode;
 	}
 
-	public String getRqstLbl() {
-		return this.rqstLbl;
+	public String getRequestLabel() {
+		return this.requestLabel;
 	}
 
-	public void setRqstLbl(String rqstLbl) {
-		this.rqstLbl = rqstLbl;
+	public void setRequestLabel(String rqstLbl) {
+		this.requestLabel = rqstLbl;
 	}
 
 	public String getResponsibilityId() {
@@ -230,4 +233,13 @@ public class KrewActnItmT implements Serializable {
 		this.verNbr = verNbr;
 	}
 
+	public String getRouteLogUrl() {
+		return routeLogUrl;
+	}
+
+	public void setRouteLogUrl(String routeLogUrl) {
+		this.routeLogUrl = routeLogUrl;
+	}
+
+	
 }

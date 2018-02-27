@@ -9,7 +9,9 @@ type KrewActnItmT{
 	documentTypeName: String!
 	roleName: String
 	requestCode: String!
+	requestLabel: String!
 	responsibilityId: String!
+	routeLogUrl: String!
 }
 
 type Query {

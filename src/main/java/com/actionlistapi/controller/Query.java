@@ -1,15 +1,18 @@
 package com.actionlistapi.controller;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.transaction.annotation.Transactional;
+import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.actionlistapi.constants.ActionListConstants;
+import com.actionlistapi.model.ActionType;
 import com.actionlistapi.model.KrewActnItmT;
 import com.actionlistapi.repository.KrewItmActnListRepository;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 
-
-
-@Transactional
 public class Query implements GraphQLQueryResolver{
 	private KrewItmActnListRepository krewItmActnListRepository;
 	
@@ -17,17 +20,35 @@ public class Query implements GraphQLQueryResolver{
 		this.krewItmActnListRepository = krewItmActnListRepository;
 	}
 	
+	
 	public Iterable<KrewActnItmT> findAllKrewActnItmT(){
-		return krewItmActnListRepository.findAll();
+		Iterable<KrewActnItmT> list = krewItmActnListRepository.findAll();
+		for(KrewActnItmT k : list ) {
+			k.setRequestLabel(getRequestCodeLabel(k.getRequestCode()));
+			k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		}
+		return list;
 	}
 	
 	public KrewActnItmT findKrewActnItmT(String id) {
-		return krewItmActnListRepository.findOne(id);
+		KrewActnItmT k = krewItmActnListRepository.findOne(id);
+		k.setRequestLabel(getRequestCodeLabel(k.getRequestCode()));
+		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		return k;
 	}
 	
 	public Iterable<KrewActnItmT> pageKrewActnItmT(Integer page, Integer count){
-		
-		return krewItmActnListRepository.findAll(new PageRequest(page,count));
+		Iterable<KrewActnItmT> kList = krewItmActnListRepository.findAll(new PageRequest(page,count)); 
+		for(KrewActnItmT k : kList ) {
+			k.setRequestLabel(getRequestCodeLabel(k.getRequestCode()));
+			k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		}
+		return kList; 
+	}
+	
+	
+	public String getRequestCodeLabel(String requestCode) {
+		return ActionType.fromCode(requestCode).getLabel();
 	}
 	
 }

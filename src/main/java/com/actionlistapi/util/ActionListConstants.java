@@ -1,4 +1,4 @@
-package com.actionlistapi.constants;
+package com.actionlistapi.util;
 
 public final class  ActionListConstants {
 

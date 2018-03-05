@@ -48,10 +48,11 @@ public class ActionListApiApplicationTests {
 	
 	
 	@Test
-	public void ActionListIntegrationTest() throws Exception {
+	public void findAllIntegrationTest() throws Exception {
 		String query ="{"
 				+ " findAllKrewActionItem { "
 				+ " id "
+				+ "creationDate"
 				+ " }"
 				+ " }"; 
 		
@@ -61,9 +62,54 @@ public class ActionListApiApplicationTests {
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"));
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T20:50:25Z"))
+         ;
 		
 	}
+	
+	@Test
+	public void findOneIntegrationTest() throws Exception {
+		String query ="{"
+				+ "findKrewActionItem ( id:\"aid10\" )" 
+				+ "{ "
+				+ "documentTypeLabel"
+				
+				+ " }"
+				+ " }"; 
+		
+		ResultActions postResult = performGraphQlPost(query);
+		
+		
+		 postResult.andExpect(status().isOk())
+         .andExpect(jsonPath("$.errors").doesNotExist())
+         .andDo(print())
+         .andExpect(jsonPath("$.findKrewActionItem.documentTypeLabel").value("credit card"))
+         ;
+		
+	}
+	
+	@Test
+	public void PageResultsIntegrationTest() throws Exception {
+		String query ="{"
+				+ "pageKrewActionItem ( offset: 1, limit: 1 )" 
+				+ "{ "
+				+ "id"
+				+ " }"
+				+ " }"; 
+		
+		ResultActions postResult = performGraphQlPost(query);
+		
+		
+		 postResult.andExpect(status().isOk())
+         .andExpect(jsonPath("$.errors").doesNotExist())
+         .andDo(print())
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].id").value("aid2"))
+         ;
+		
+	}
+	
+	
 	
 	
 	private ResultActions performGraphQlPost(String query) throws Exception {

@@ -63,7 +63,7 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T20:50:25Z"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T15:50:25Z"))
          ;
 		
 	}

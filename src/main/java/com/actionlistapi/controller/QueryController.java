@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.actionlistapi.datafetcher.AllKrewActnItmTDataFetcher;
 import com.actionlistapi.datafetcher.KrewActnItmTDataFetcher;
 import com.actionlistapi.datafetcher.PageKrewActnItmTDataFetcher;
+import com.zhokhov.graphql.datetime.GraphQLDate;
+import com.zhokhov.graphql.datetime.GraphQLLocalDate;
+import com.zhokhov.graphql.datetime.GraphQLLocalDateTime;
 
 import graphql.ExecutionResult;
 import graphql.GraphQL;
+import graphql.Scalars;
+import graphql.schema.GraphQLScalarType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -33,7 +39,16 @@ public class QueryController {
 	@Value("classpath:/graphql/actionItm.graphqls")
 	private Resource schemaResource;
 	
+	
+	
 	private GraphQL graphQL;
+	
+
+	@Autowired
+	@Qualifier("graphQLDate")
+	private GraphQLScalarType Date;
+
+
 	
 	@Autowired
 	private AllKrewActnItmTDataFetcher allKrewActnItmTDataFetcher;
@@ -56,11 +71,15 @@ public class QueryController {
 	}
 
 	private RuntimeWiring buildRuntimeWiring() {
+		
+
 		return RuntimeWiring.newRuntimeWiring()
 				.type("Query", typeWiring -> typeWiring
-						.dataFetcher("findAllKrewActnItmT", allKrewActnItmTDataFetcher)
-						.dataFetcher("findKrewActnItmT", krewActnItmDataFetcher)
-						.dataFetcher("pageKrewActnItmT", pageKrewActnItmTDataFetcher))
+						.dataFetcher("findAllKrewActionItem", allKrewActnItmTDataFetcher)
+						.dataFetcher("findKrewActionItem", krewActnItmDataFetcher)
+						.dataFetcher("pageKrewActionItem", pageKrewActnItmTDataFetcher))
+						.scalar(Date)
+						
 				.build();
 	}
 	

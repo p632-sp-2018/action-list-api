@@ -77,14 +77,46 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
+ 		<dependency>
+			<groupId>com.zhokhov.graphql</groupId>
+			<artifactId>graphql-datetime-spring-boot-starter</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zhokhov.graphql</groupId>
+			<artifactId>graphql-java-datetime</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.zhokhov.graphql</groupId>
+			<artifactId>graphql-datetime-autoconfigure</artifactId>
+			<version>1.0.0</version>
+			<type>pom</type>
+		</dependency>   
 
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>https://jcenter.bintray.com/</url>
+		</repository>
+	</repositories> 
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-
+		
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+			
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
@@ -100,13 +132,34 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
 		</plugins>
 	</build>
 
-
+		
 </project>

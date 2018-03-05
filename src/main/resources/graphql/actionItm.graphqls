@@ -1,11 +1,13 @@
 
+scalar Date
+
 type Query {
-	findAllKrewActnItmT : [KrewActnItmT]
-	findKrewActnItmT(id: String):KrewActnItmT!
-	pageKrewActnItmT(offset: Int!, limit: Int! ):[KrewActnItmT]
+	findAllKrewActionItem : [KrewActionItem]
+	findKrewActionItem(id: String):KrewActionItem!
+	pageKrewActionItem(offset: Int!, limit: Int! ):[KrewActionItem]
 }
 
-type KrewActnItmT{
+type KrewActionItem{
 	id :ID! 
 	documentTypeLabel : String!
 	title : String
@@ -19,5 +21,7 @@ type KrewActnItmT{
 	requestLabel: String!
 	responsibilityId: String!
 	routeLogUrl: String!
+	creationDate : Date!
+	
 }
 

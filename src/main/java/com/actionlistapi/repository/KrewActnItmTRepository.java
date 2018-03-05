@@ -6,6 +6,6 @@ import com.actionlistapi.model.KrewActnItmT;
 
 
 
-public interface KrewItmActnListRepository extends PagingAndSortingRepository<KrewActnItmT,String>{
+public interface KrewActnItmTRepository extends PagingAndSortingRepository<KrewActnItmT,String>{
 
 }

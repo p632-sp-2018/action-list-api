@@ -1,3 +1,4 @@
+
 type Query {
 	findAllKrewActnItmT : [KrewActnItmT]
 	findKrewActnItmT(id: String):KrewActnItmT!

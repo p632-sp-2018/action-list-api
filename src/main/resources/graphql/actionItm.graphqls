@@ -2,12 +2,20 @@
 scalar Date
 
 type Query {
-	findAllKrewActionItem : [KrewActionItem]
-	findKrewActionItem(id: String):KrewActionItem!
-	pageKrewActionItem(offset: Int!, limit: Int! ):[KrewActionItem]
+	findAllKrewActionItem : [KrewActnItmT]
+	findKrewActionItem(id: String):KrewActnItmT!
+	pageKrewActionItem(offset: Int!, limit: Int! ):[KrewActnItmT]
 }
 
-type KrewActionItem{
+type KrimGrpT{
+	id: ID
+	name: String
+	nameSpace: String
+	description: String
+	active: String
+}
+
+type KrewActnItmT{
 	id :ID! 
 	documentTypeLabel : String!
 	title : String
@@ -21,7 +29,6 @@ type KrewActionItem{
 	requestLabel: String!
 	responsibilityId: String!
 	routeLogUrl: String!
-	creationDate : Date!
-	
+	group:KrimGrpT
+	creationDate : Date!	
 }
-

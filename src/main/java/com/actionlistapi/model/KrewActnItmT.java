@@ -58,9 +58,11 @@ public class KrewActnItmT implements Serializable {
 
 	@Column(length=50)
 	private String dtype;
-
-	@Column(name="GRP_ID", length=40)
-	private String grpId;
+	
+	@ManyToOne
+	@JoinColumn(name="GRP_ID")
+	private KrimGrpT group;
+//	private String groupId;
 
 	@Column(name="PRNCPL_ID", nullable=false, length=40)
 	private String prncplId;
@@ -182,13 +184,21 @@ public class KrewActnItmT implements Serializable {
 		this.dtype = dtype;
 	}
 
-	public String getGrpId() {
-		return this.grpId;
+	public KrimGrpT getGroup() {
+		return group;
 	}
 
-	public void setGrpId(String grpId) {
-		this.grpId = grpId;
+	public void setGroup(KrimGrpT group) {
+		this.group = group;
 	}
+
+//	public String getGroupId() {
+//		return this.groupId;
+//	}
+//
+//	public void setGroupId(String groupId) {
+//		this.groupId = groupId;
+//	}
 
 	public String getPrncplId() {
 		return this.prncplId;

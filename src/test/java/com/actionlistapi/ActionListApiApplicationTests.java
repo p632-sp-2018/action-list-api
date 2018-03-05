@@ -50,7 +50,7 @@ public class ActionListApiApplicationTests {
 	@Test
 	public void ActionListIntegrationTest() throws Exception {
 		String query ="{"
-				+ " findAllKrewActnItmT { "
+				+ " findAllKrewActionItem { "
 				+ " id "
 				+ " }"
 				+ " }"; 
@@ -61,7 +61,7 @@ public class ActionListApiApplicationTests {
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.findAllKrewActnItmT.[0].id").value("aid1"));
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"));
 		
 	}
 	

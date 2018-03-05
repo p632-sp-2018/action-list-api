@@ -1,9 +1,14 @@
 package com.actionlistapi.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
+
+import javax.persistence.*;
+
+import graphql.Scalars;
+
+import java.math.BigDecimal;
+
 
 
 /**
@@ -23,7 +28,7 @@ public class KrewActnItmT implements Serializable {
 	@Column(name="ACTN_RQST_ID", nullable=false, length=40)
 	private String actionRequestId;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	//@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ASND_DT", nullable=false)
 	private Date creationDate;
 

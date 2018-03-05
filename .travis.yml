@@ -2,24 +2,29 @@ language: java
 group: stable
 jdk:
 - oraclejdk8
-script: mvn clean verify
-script: mvn checkstyle:checkstyle
+
+
+    
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 # git strips the wrapper jar file so we have to force its download during the build
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-machine:
-  environment:
-    CC_TEST_REPORTER_ID: 96ae089d0a21104da1c39f0c0fd272b22a763c132e328a215cd90689f735eee2
-    
-dependencies:
-  post:
-    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-    - chmod +x ./cc-test-reporter
+- mvn -e -X clean install -P create-jacoco-reports
 
-test:
-  pre:
-    - ./cc-test-reporter before-build
 
-  post:
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+script: 
+    - mvn clean install
+    - mvn clean verify
+script: 
+    - mvn checkstyle:checkstyle
+
+
+after_success:
+  - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
+  - cd src/main/java/
+  - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT

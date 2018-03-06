@@ -13,6 +13,15 @@ type KrimGrpT{
 	nameSpace: String
 	description: String
 	active: String
+	lastUpdateDate: Date
+}
+
+type KrimPrncplT{
+	id: ID!
+	username: String
+	entityId: String
+	active: String
+	lastUpdateDate: Date
 }
 
 type KrewActnItmT{
@@ -29,6 +38,7 @@ type KrewActnItmT{
 	requestLabel: String!
 	responsibilityId: String!
 	routeLogUrl: String!
-	group:KrimGrpT
+	group: KrimGrpT
+	principal: KrimPrncplT
 	creationDate : Date!	
 }

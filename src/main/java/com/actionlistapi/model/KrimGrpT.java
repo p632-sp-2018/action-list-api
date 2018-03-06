@@ -11,7 +11,7 @@ import java.util.Objects;
  * 
  */
 @Entity
-@Table(name = "krim_grp_t", schema = "p565f17_spanchal")
+@Table(name = "krim_grp_t")
 public class KrimGrpT implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class KrimGrpT implements Serializable{
     private String description;
     private String kimTypId;
     private String active;
-    private Timestamp lastUpdtDt;
+    private Timestamp lastUpdateDate;
 
     public KrimGrpT() {
     }
@@ -108,36 +108,13 @@ public class KrimGrpT implements Serializable{
         this.active = active;
     }
 
-//    @Temporal(TemporalType.TIMESTAMP)
     @Basic
     @Column(name = "LAST_UPDT_DT", nullable = true)
-    public Timestamp getLastUpdtDt() {
-        return lastUpdtDt;
+    public Timestamp getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
-    public void setLastUpdtDt(Timestamp lastUpdtDt) {
-        this.lastUpdtDt = lastUpdtDt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        KrimGrpT krimGrpT = (KrimGrpT) o;
-        return Objects.equals(id, krimGrpT.id) &&
-                Objects.equals(objId, krimGrpT.objId) &&
-                Objects.equals(verNbr, krimGrpT.verNbr) &&
-                Objects.equals(name, krimGrpT.name) &&
-                Objects.equals(nameSpace, krimGrpT.nameSpace) &&
-                Objects.equals(description, krimGrpT.description) &&
-                Objects.equals(kimTypId, krimGrpT.kimTypId) &&
-                Objects.equals(active, krimGrpT.active) &&
-                Objects.equals(lastUpdtDt, krimGrpT.lastUpdtDt);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, objId, verNbr, name, nameSpace, description, kimTypId, active, lastUpdtDt);
+    public void setLastUpdateDate(Timestamp lastUpdtDt) {
+        this.lastUpdateDate = lastUpdtDt;
     }
 }

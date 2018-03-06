@@ -5,11 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import graphql.Scalars;
-
 import java.math.BigDecimal;
-
-
 
 /**
  * The persistent class for the KREW_ACTN_ITM_T database table.
@@ -28,7 +24,6 @@ public class KrewActnItmT implements Serializable {
 	@Column(name="ACTN_RQST_ID", nullable=false, length=40)
 	private String actionRequestId;
 
-	//@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="ASND_DT", nullable=false)
 	private Date creationDate;
 
@@ -62,10 +57,13 @@ public class KrewActnItmT implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="GRP_ID")
 	private KrimGrpT group;
-//	private String groupId;
 
-	@Column(name="PRNCPL_ID", nullable=false, length=40)
-	private String prncplId;
+	@ManyToOne
+	@JoinColumn(name="PRNCPL_ID")
+	private KrimPrncplT principal;
+
+//	@Column(name="PRNCPL_ID", updatable=false)
+//	private String principalId;
 
 	@Column(name="ROLE_NM", length=2000)
 	private String roleName;
@@ -192,20 +190,20 @@ public class KrewActnItmT implements Serializable {
 		this.group = group;
 	}
 
-//	public String getGroupId() {
-//		return this.groupId;
-//	}
-//
-//	public void setGroupId(String groupId) {
-//		this.groupId = groupId;
+//	public String getPrncplId() {
+//		return this.principalId;
 //	}
 
-	public String getPrncplId() {
-		return this.prncplId;
+//	public void setPrncplId(String principalId) {
+//		this.principalId = principalId;
+//	}
+
+	public KrimPrncplT getPrincipal() {
+		return principal;
 	}
 
-	public void setPrncplId(String prncplId) {
-		this.prncplId = prncplId;
+	public void setPrincipal(KrimPrncplT principal) {
+		this.principal = principal;
 	}
 
 	public String getRoleName() {

@@ -46,15 +46,16 @@ public class ActionListApiApplicationTests {
 	    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
-	
 	@Test
 	public void findAllIntegrationTest() throws Exception {
-		String query ="{"
-				+ " findAllKrewActionItem { "
-				+ " id "
-				+ "creationDate"
-				+ " }"
-				+ " }"; 
+		String query ="{ "
+				+ "findAllKrewActionItem { "
+				+ "id "
+				+ "group {"
+				+ "id "
+				+ "name "
+				+ "description "
+				+ "} } }";
 		
 		ResultActions postResult = performGraphQlPost(query);
 		
@@ -63,20 +64,21 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T15:50:25Z"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.id").value("a1"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.name").value("nightwatchers"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.description").value("Group working for UITS in OOSM course"))
          ;
 		
 	}
 	
 	@Test
 	public void findOneIntegrationTest() throws Exception {
-		String query ="{"
-				+ "findKrewActionItem ( id:\"aid10\" )" 
+		String query ="{ "
+				+ "findKrewActionItem ( id:\"aid10\" ) " 
 				+ "{ "
-				+ "documentTypeLabel"
-				
-				+ " }"
-				+ " }"; 
+				+ "documentTypeLabel "
+				+ "} "
+				+ "}"; 
 		
 		ResultActions postResult = performGraphQlPost(query);
 		
@@ -91,10 +93,11 @@ public class ActionListApiApplicationTests {
 	
 	@Test
 	public void PageResultsIntegrationTest() throws Exception {
-		String query ="{"
+		String query ="{ "
 				+ "pageKrewActionItem ( offset: 1, limit: 1 )" 
 				+ "{ "
-				+ "id"
+				+ "id "
+				+ "documentTypeLabel "
 				+ " }"
 				+ " }"; 
 		
@@ -105,12 +108,10 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
          .andExpect(jsonPath("$.pageKrewActionItem.[0].id").value("aid2"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].documentTypeLabel").value("i30_lbl"))
          ;
 		
 	}
-	
-	
-	
 	
 	private ResultActions performGraphQlPost(String query) throws Exception {
         return performGraphQlPost(query, null);
@@ -135,6 +136,4 @@ public class ActionListApiApplicationTests {
 
         return jsonObject.toString();
     }
-	
-
 }

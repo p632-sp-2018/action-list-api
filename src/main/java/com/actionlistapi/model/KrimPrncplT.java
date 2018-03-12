@@ -30,17 +30,8 @@ public class KrimPrncplT implements Serializable {
 	@Column(name="LAST_UPDT_DT")
 	private Date lastUpdateDate;
 
-	@Column(name="OBJ_ID", nullable=false, length=36)
-	private String objId;
-
 	@Column(name="PRNCPL_NM", nullable=false, length=100)
 	private String username;
-
-	@Column(name="PRNCPL_PSWD", length=400)
-	private String prncplPswd;
-
-	@Column(name="VER_NBR", nullable=false, precision=10)
-	private BigDecimal verNbr;
 
 	public KrimPrncplT() {
 	}
@@ -77,14 +68,6 @@ public class KrimPrncplT implements Serializable {
 		this.lastUpdateDate = lastUpdtDt;
 	}
 
-	public String getObjId() {
-		return this.objId;
-	}
-
-	public void setObjId(String objId) {
-		this.objId = objId;
-	}
-
 	public String getUsername() {
 		return this.username;
 	}
@@ -92,21 +75,4 @@ public class KrimPrncplT implements Serializable {
 	public void setUsername(String prncplNm) {
 		this.username = prncplNm;
 	}
-
-	public String getPrncplPswd() {
-		return this.prncplPswd;
-	}
-
-	public void setPrncplPswd(String prncplPswd) {
-		this.prncplPswd = prncplPswd;
-	}
-
-	public BigDecimal getVerNbr() {
-		return this.verNbr;
-	}
-
-	public void setVerNbr(BigDecimal verNbr) {
-		this.verNbr = verNbr;
-	}
-
 }

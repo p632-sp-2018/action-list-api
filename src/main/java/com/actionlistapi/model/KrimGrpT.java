@@ -39,26 +39,6 @@ public class KrimGrpT implements Serializable{
     }
 
     @Basic
-    @Column(name = "OBJ_ID", nullable = false, length = 36)
-    public String getObjId() {
-        return objId;
-    }
-
-    public void setObjId(String objId) {
-        this.objId = objId;
-    }
-
-    @Basic
-    @Column(name = "VER_NBR", nullable = false, precision = 0)
-    public BigDecimal getVerNbr() {
-        return verNbr;
-    }
-
-    public void setVerNbr(BigDecimal verNbr) {
-        this.verNbr = verNbr;
-    }
-
-    @Basic
     @Column(name = "GRP_NM", nullable = false, length = 80)
     public String getName() {
         return name;

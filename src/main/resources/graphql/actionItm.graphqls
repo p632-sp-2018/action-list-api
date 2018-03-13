@@ -7,6 +7,25 @@ type Query {
 	pageKrewActionItem(offset: Int!, limit: Int! ):[KrewActnItmT]
 }
 
+type KrewDocHdrT{
+	id: ID
+	routeStatus: String
+	lastApprovedDate: Date
+	initiator: KrimPrncplT
+}
+
+type KrimEntityNmT{
+	id: ID
+	defaultName: String
+	firstName: String
+	middleName: String
+	lastName: String
+	personURL: String
+	lastUpdateDate: Date
+	defaultIndicator: String
+	activeIndicator: String
+}
+
 type KrimGrpT{
 	id: ID
 	name: String
@@ -19,7 +38,7 @@ type KrimGrpT{
 type KrimPrncplT{
 	id: ID!
 	username: String
-	entityId: String
+	person: KrimEntityNmT
 	active: String
 	lastUpdateDate: Date
 }
@@ -28,7 +47,7 @@ type KrewActnItmT{
 	id :ID! 
 	documentTypeLabel : String!
 	title : String
-	documentId : String!
+	document : KrewDocHdrT
 	actionRequestId: String!
 	delegationType: String
 	documentUrl: String!

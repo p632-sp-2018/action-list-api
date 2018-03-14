@@ -20,7 +20,7 @@ type KrimEntityNmT{
 	firstName: String
 	middleName: String
 	lastName: String
-	personURL: String
+	personUrl: String
 	lastUpdateDate: Date
 	defaultIndicator: String
 	activeIndicator: String
@@ -33,6 +33,7 @@ type KrimGrpT{
 	description: String
 	active: String
 	lastUpdateDate: Date
+	groupUrl: String
 }
 
 type KrimPrncplT{

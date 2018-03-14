@@ -60,7 +60,7 @@ public class KrimEntityNmT implements Serializable {
 	private String defaultName;
 	
 	@Transient
-	private String personURL;
+	private String personUrl;
 
 
 	public String getId() {
@@ -183,12 +183,12 @@ public class KrimEntityNmT implements Serializable {
 		this.defaultName = defaultName;
 	}
 
-	public String getPersonURL() {
-		return personURL;
+	public String getPersonUrl() {
+		return personUrl;
 	}
 
-	public void setPersonURL(String personURL) {
-		this.personURL = personURL;
+	public void setPersonUrl(String personUrl) {
+		this.personUrl = personUrl;
 	}
 
 }

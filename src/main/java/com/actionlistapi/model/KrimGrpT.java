@@ -32,8 +32,10 @@ public class KrimGrpT implements Serializable{
     @Column(name = "LAST_UPDT_DT", nullable = true)
     private Date lastUpdateDate;
     
+    @Transient
+    private String groupUrl;
 
-    public KrimGrpT() {
+	public KrimGrpT() {
     }
     
     
@@ -84,4 +86,13 @@ public class KrimGrpT implements Serializable{
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
+
+    public String getGroupUrl() {
+		return groupUrl;
+	}
+
+	public void setGroupUrl(String groupUrl) {
+		this.groupUrl = groupUrl;
+	}
+
 }

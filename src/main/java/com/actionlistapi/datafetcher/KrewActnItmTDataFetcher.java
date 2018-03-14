@@ -28,10 +28,11 @@ public class KrewActnItmTDataFetcher implements DataFetcher<KrewActnItmT> {
 		KrewActnItmT k = krewItmActnListRepository.findOne((String)arguments.get("id"));
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
 		// Implemented to set the Person object
 		KrimEntityNmT p = k.getPrincipal().getPerson();
 		p.setDefaultName(p.getLastName() + ", " + p.getFirstName() + " " + p.getMiddleName());
-		p.setPersonURL(ActionListConstants.PERSON_URL + k.getPrincipal().getUsername());
+		p.setPersonUrl(ActionListConstants.PERSON_URL + k.getPrincipal().getPerson().getId());
 		if (p.getDefaultIndicator().equalsIgnoreCase("N") || p.getActiveIndicator().equalsIgnoreCase("N")) {
 			k.getPrincipal().setPerson(null);
 		}

@@ -2,12 +2,10 @@ package com.actionlistapi.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
-
 /**
- * The persistent class for the krim_prncpl_t database table.
+ * The persistent class for the KRIM_PRNCPL_T database table.
  * 
  */
 @Entity
@@ -23,8 +21,12 @@ public class KrimPrncplT implements Serializable {
 	@Column(name="ACTV_IND", length=1)
 	private String active;
 
-	@Column(name="ENTITY_ID", length=40)
-	private String entityId;
+//	@Column(name="ENTITY_ID", length=40)
+//	private String entityId;
+	
+	@ManyToOne
+	@JoinColumn(name="ENTITY_ID")
+	private KrimEntityNmT person;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="LAST_UPDT_DT")
@@ -52,12 +54,20 @@ public class KrimPrncplT implements Serializable {
 		this.active = actvInd;
 	}
 
-	public String getEntityId() {
-		return this.entityId;
+//	public String getEntityId() {
+//		return this.entityId;
+//	}
+//
+//	public void setEntityId(String entityId) {
+//		this.entityId = entityId;
+//	}
+	
+	public KrimEntityNmT getPerson() {
+		return person;
 	}
 
-	public void setEntityId(String entityId) {
-		this.entityId = entityId;
+	public void setPerson(KrimEntityNmT person) {
+		this.person = person;
 	}
 
 	public Date getLastUpdateDate() {

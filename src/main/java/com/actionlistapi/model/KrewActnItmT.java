@@ -2,10 +2,10 @@ package com.actionlistapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.*;
 
-import java.math.BigDecimal;
+import com.actionlistapi.util.ActionListConstants;
+import com.actionlistapi.util.ActionListUtil;
 
 /**
  * The persistent class for the KREW_ACTN_ITM_T database table.
@@ -13,7 +13,6 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="KREW_ACTN_ITM_T")
-
 public class KrewActnItmT implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,9 +26,6 @@ public class KrewActnItmT implements Serializable {
 	@Column(name="DOC_HDLR_URL", nullable=false, length=255)
 	private String documentUrl;
 
-	@Column(name="DOC_HDR_ID", nullable=false, length=40)
-	private String documentId;
-
 	@Column(name="DOC_HDR_TTL", length=255)
 	private String title;
 
@@ -39,16 +35,26 @@ public class KrewActnItmT implements Serializable {
 	@Column(name="DOC_TYP_NM", nullable=false, length=64)
 	private String documentTypeName;
 	
+//	@Column(name="GRP_ID", length=40)
+//	private String grpId;	
+	
 	@ManyToOne
 	@JoinColumn(name="GRP_ID")
 	private KrimGrpT group;
+
+//	@Column(name="PRNCPL_ID", updatable=false)
+//	private String principalId;
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
 	private KrimPrncplT principal;
 
-//	@Column(name="PRNCPL_ID", updatable=false)
-//	private String principalId;
+//	@Column(name="DOC_HDR_ID", nullable=false, length=40)
+//	private String documentId;
+	
+	@ManyToOne
+	@JoinColumn(name="DOC_HDR_ID")
+	private KrewDocHdrT document;
 
 	@Column(name="RQST_CD", nullable=false, length=1)
 	private String requestCode;
@@ -69,6 +75,7 @@ public class KrewActnItmT implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public Date getCreationDate() {
 		return this.creationDate;
 	}
@@ -83,14 +90,6 @@ public class KrewActnItmT implements Serializable {
 
 	public void setDocumentUrl(String documentUrl) {
 		this.documentUrl = documentUrl;
-	}
-
-	public String getDocumentId() {
-		return this.documentId;
-	}
-
-	public void setDocumentId(String documentId) {
-		this.documentId = documentId;
 	}
 
 	public String getTitle() {
@@ -116,6 +115,14 @@ public class KrewActnItmT implements Serializable {
 	public void setDocumentTypeName(String documentTypeName) {
 		this.documentTypeName = documentTypeName;
 	}
+	
+//	public String getGrpId() {
+//		return this.grpId;
+//	}
+//
+//	public void setId(String grpId) {
+//		this.grpId = grpId;
+//	}
 
 	public KrimGrpT getGroup() {
 		return group;
@@ -140,7 +147,23 @@ public class KrewActnItmT implements Serializable {
 	public void setPrincipal(KrimPrncplT principal) {
 		this.principal = principal;
 	}
+	
+//	public String getDocumentId() {
+//		return this.documentId;
+//	}
+//
+//	public void setDocumentId(String documentId) {
+//		this.documentId = documentId;
+//	}
 
+	public KrewDocHdrT getDocument() {
+		return document;
+	}
+
+	public void setDocument(KrewDocHdrT document) {
+		this.document = document;
+	}
+	
 	public String getRequestCode() {
 		return this.requestCode;
 	}
@@ -154,16 +177,14 @@ public class KrewActnItmT implements Serializable {
 	}
 
 	public void setRequestLabel(String rqstLbl) {
-		this.requestLabel = rqstLbl;
+		this.requestLabel = rqstLbl;		
 	}
 
 	public String getRouteLogUrl() {
-		return routeLogUrl;
+		return this.routeLogUrl;
 	}
 
 	public void setRouteLogUrl(String routeLogUrl) {
 		this.routeLogUrl = routeLogUrl;
 	}
-
-	
 }

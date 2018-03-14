@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.actionlistapi.model.ActionType;
 import com.actionlistapi.model.KrewActnItmT;
+import com.actionlistapi.model.KrimEntityNmT;
 import com.actionlistapi.repository.KrewActnItmTRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -27,6 +28,17 @@ public class KrewActnItmTDataFetcher implements DataFetcher<KrewActnItmT> {
 		KrewActnItmT k = krewItmActnListRepository.findOne((String)arguments.get("id"));
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
+		// Implemented to set the Person object
+		KrimEntityNmT p = k.getPrincipal().getPerson();
+		p.setDefaultName(p.getLastName() + ", " + p.getFirstName() + " " + p.getMiddleName());
+		p.setPersonUrl(ActionListConstants.PERSON_URL + k.getPrincipal().getPerson().getId());
+		if (p.getDefaultIndicator().equalsIgnoreCase("N") || p.getActiveIndicator().equalsIgnoreCase("N")) {
+			k.getPrincipal().setPerson(null);
+		}
+		else {
+			k.getPrincipal().setPerson(p);
+		}
 		return k;
 	}
 

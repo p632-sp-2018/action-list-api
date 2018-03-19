@@ -16,34 +16,37 @@ public class KrimPrncplT implements Serializable {
 
 	@Id
 	@Column(name="PRNCPL_ID", unique=true, nullable=false, length=40)
-	private String id;
+	private String universityId;
 
 	@Column(name="ACTV_IND", length=1)
 	private String active;
-
-//	@Column(name="ENTITY_ID", length=40)
-//	private String entityId;
 	
 	@ManyToOne
 	@JoinColumn(name="ENTITY_ID")
-	private KrimEntityNmT person;
+	private KrimEntityNmT entity;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="LAST_UPDT_DT")
 	private Date lastUpdateDate;
 
 	@Column(name="PRNCPL_NM", nullable=false, length=100)
-	private String username;
+	private String networkId;
+
+	@Transient
+	private String defaultDisplayName;
+	
+	@Transient
+	private String personUrl;
 
 	public KrimPrncplT() {
 	}
 
-	public String getId() {
-		return this.id;
+	public String getUniversityId() {
+		return this.universityId;
 	}
 
-	public void setId(String prncplId) {
-		this.id = prncplId;
+	public void setUniversityId(String universityId) {
+		this.universityId = universityId;
 	}
 
 	public String getActive() {
@@ -54,20 +57,12 @@ public class KrimPrncplT implements Serializable {
 		this.active = actvInd;
 	}
 
-//	public String getEntityId() {
-//		return this.entityId;
-//	}
-//
-//	public void setEntityId(String entityId) {
-//		this.entityId = entityId;
-//	}
-	
-	public KrimEntityNmT getPerson() {
-		return person;
+	public KrimEntityNmT getEntity() {
+		return entity;
 	}
 
-	public void setPerson(KrimEntityNmT person) {
-		this.person = person;
+	public void setEntity(KrimEntityNmT entity) {
+		this.entity = entity;
 	}
 
 	public Date getLastUpdateDate() {
@@ -78,11 +73,28 @@ public class KrimPrncplT implements Serializable {
 		this.lastUpdateDate = lastUpdtDt;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public String getNetworkId() {
+		return this.networkId;
 	}
 
-	public void setUsername(String prncplNm) {
-		this.username = prncplNm;
+	public void setNetworkId(String networkId) {
+		this.networkId = networkId;
 	}
+	
+	public String getDefaultDisplayName() {
+		return defaultDisplayName;
+	}
+
+	public void setDefaultDisplayName(String defaultDisplayName) {
+		this.defaultDisplayName = defaultDisplayName;
+	}
+
+	public String getPersonUrl() {
+		return personUrl;
+	}
+
+	public void setPersonUrl(String personUrl) {
+		this.personUrl = personUrl;
+	}
+
 }

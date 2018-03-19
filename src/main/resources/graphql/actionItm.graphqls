@@ -14,18 +14,6 @@ type KrewDocHdrT{
 	initiator: KrimPrncplT
 }
 
-type KrimEntityNmT{
-	id: ID
-	defaultName: String
-	firstName: String
-	middleName: String
-	lastName: String
-	personUrl: String
-	lastUpdateDate: Date
-	defaultIndicator: String
-	activeIndicator: String
-}
-
 type KrimGrpT{
 	id: ID
 	name: String
@@ -37,9 +25,10 @@ type KrimGrpT{
 }
 
 type KrimPrncplT{
-	id: ID!
-	username: String
-	person: KrimEntityNmT
+	universityId: ID!
+	networkId: String
+	defaultDisplayName: String
+	personUrl: String
 	active: String
 	lastUpdateDate: Date
 }
@@ -49,16 +38,12 @@ type KrewActnItmT{
 	documentTypeLabel : String!
 	title : String
 	document : KrewDocHdrT
-	actionRequestId: String!
-	delegationType: String
 	documentUrl: String!
 	documentTypeName: String!
-	roleName: String
 	requestCode: String!
 	requestLabel: String!
-	responsibilityId: String!
 	routeLogUrl: String!
 	group: KrimGrpT
-	principal: KrimPrncplT
+	initiator: KrimPrncplT
 	creationDate : Date!	
 }

@@ -47,7 +47,7 @@ public class KrewActnItmT implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
-	private KrimPrncplT principal;
+	private KrimPrncplT initiator;
 
 //	@Column(name="DOC_HDR_ID", nullable=false, length=40)
 //	private String documentId;
@@ -140,12 +140,12 @@ public class KrewActnItmT implements Serializable {
 //		this.principalId = principalId;
 //	}
 
-	public KrimPrncplT getPrincipal() {
-		return principal;
+	public KrimPrncplT getInitiator() {
+		return initiator;
 	}
 
-	public void setPrincipal(KrimPrncplT principal) {
-		this.principal = principal;
+	public void setInitiator(KrimPrncplT initiator) {
+		this.initiator = initiator;
 	}
 	
 //	public String getDocumentId() {

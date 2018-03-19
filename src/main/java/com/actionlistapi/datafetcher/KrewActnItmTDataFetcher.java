@@ -30,10 +30,12 @@ public class KrewActnItmTDataFetcher implements DataFetcher<KrewActnItmT> {
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
 		
 		// Implemented to set the groupUrl in the KrimGrpT / group 
-		k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
-
+		if(k.getGroup() != null)
+			k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
+		
 		// Implemented to set the personUrl inside KrimPrncplT / initiator
 		k.getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
+		//k.getDocument().getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
 		
 		// Implemented to set the entity details in KrimPrncplT pojo
 		KrimEntityNmT e = k.getInitiator().getEntity();

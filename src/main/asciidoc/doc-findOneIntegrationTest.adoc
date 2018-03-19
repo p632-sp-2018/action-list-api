@@ -1,0 +1,27 @@
+== Test case Document for Retrieving a single Item based on its identifier -findOneIntegrationTest Document
+
+
+Example of curl command:
+
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/curl-request.adoc[]
+
+Example of http request:
+
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/http-request.adoc[]
+
+Example of http response:
+
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/http-response.adoc[]
+
+Request body:
+
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/request-body.adoc[]
+
+Httpie Request body:
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/httpie-request.adoc[]
+
+Response body:
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/response-body.adoc[]
+
+Response fields for Krew Action Item Table - KrewActnItmT :
+include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/response-fields-KrewActionItemTable.adoc[]

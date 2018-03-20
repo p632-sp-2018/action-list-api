@@ -431,7 +431,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/graphql' -i -X POST \
     -H 'Content-Type: application/json' \
-    -d '{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl group { id name nameSpace active groupUrl description }initiator { universityId networkId defaultDisplayName personUrl active }document { id routeStatus  } } }'</code></pre>
+    -d '{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl creationDate group { id name nameSpace active groupUrl description lastUpdateDate }initiator { universityId networkId defaultDisplayName personUrl active lastUpdateDate }document { id routeStatus lastApprovedDate } } }'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -442,9 +442,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">POST /graphql HTTP/1.1
 Content-Type: application/json
 Host: localhost:8080
-Content-Length: 298
+Content-Length: 357
 
-{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl group { id name nameSpace active groupUrl description }initiator { universityId networkId defaultDisplayName personUrl active }document { id routeStatus  } } }</code></pre>
+{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl creationDate group { id name nameSpace active groupUrl description lastUpdateDate }initiator { universityId networkId defaultDisplayName personUrl active lastUpdateDate }document { id routeStatus lastApprovedDate } } }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -454,9 +454,9 @@ Content-Length: 298
 <div class="content">
 <pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 454
+Content-Length: 574
 
-{"pageKrewActionItem":[{"id":"aid2","documentTypeLabel":"i30_lbl","documentTypeName":"40","documentUrl":"http://localhost:8080/workflow/documents/aid2","title":"data_api","requestCode":"C","requestLabel":"Complete","routeLogUrl":"http://localhost:8080/workflow/documents/aid2/log","group":null,"initiator":{"universityId":"pid2","networkId":"prncpl2","defaultDisplayName":null,"personUrl":null,"active":"n"},"document":{"id":"dhid2","routeStatus":"S"}}]}</code></pre>
+{"pageKrewActionItem":[{"id":"aid2","documentTypeLabel":"i30_lbl","documentTypeName":"40","documentUrl":"http://localhost:8080/workflow/documents/aid2","title":"data_api","requestCode":"C","requestLabel":"Complete","routeLogUrl":"http://localhost:8080/workflow/documents/aid2/log","creationDate":"2018-02-13T00:29:40Z","group":null,"initiator":{"universityId":"pid2","networkId":"prncpl2","defaultDisplayName":null,"personUrl":null,"active":"n","lastUpdateDate":"2018-01-24T16:05:32Z"},"document":{"id":"dhid2","routeStatus":"S","lastApprovedDate":"2017-07-01T00:00:00Z"}}]}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -464,7 +464,7 @@ Content-Length: 454
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl group { id name nameSpace active groupUrl description }initiator { universityId networkId defaultDisplayName personUrl active }document { id routeStatus  } } }</code></pre>
+<pre class="highlight nowrap"><code>{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl creationDate group { id name nameSpace active groupUrl description lastUpdateDate }initiator { universityId networkId defaultDisplayName personUrl active lastUpdateDate }document { id routeStatus lastApprovedDate } } }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -472,7 +472,7 @@ Content-Length: 454
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl group { id name nameSpace active groupUrl description }initiator { universityId networkId defaultDisplayName personUrl active }document { id routeStatus  } } }' | http POST 'http://localhost:8080/graphql' \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{ pageKrewActionItem ( offset: 1, limit: 1 ){ id documentTypeLabel documentTypeName documentUrl title requestCode requestLabel routeLogUrl creationDate group { id name nameSpace active groupUrl description lastUpdateDate }initiator { universityId networkId defaultDisplayName personUrl active lastUpdateDate }document { id routeStatus lastApprovedDate } } }' | http POST 'http://localhost:8080/graphql' \
     'Content-Type:application/json'</code></pre>
 </div>
 </div>
@@ -481,7 +481,7 @@ Content-Length: 454
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{"pageKrewActionItem":[{"id":"aid2","documentTypeLabel":"i30_lbl","documentTypeName":"40","documentUrl":"http://localhost:8080/workflow/documents/aid2","title":"data_api","requestCode":"C","requestLabel":"Complete","routeLogUrl":"http://localhost:8080/workflow/documents/aid2/log","group":null,"initiator":{"universityId":"pid2","networkId":"prncpl2","defaultDisplayName":null,"personUrl":null,"active":"n"},"document":{"id":"dhid2","routeStatus":"S"}}]}</code></pre>
+<pre class="highlight nowrap"><code>{"pageKrewActionItem":[{"id":"aid2","documentTypeLabel":"i30_lbl","documentTypeName":"40","documentUrl":"http://localhost:8080/workflow/documents/aid2","title":"data_api","requestCode":"C","requestLabel":"Complete","routeLogUrl":"http://localhost:8080/workflow/documents/aid2/log","creationDate":"2018-02-13T00:29:40Z","group":null,"initiator":{"universityId":"pid2","networkId":"prncpl2","defaultDisplayName":null,"personUrl":null,"active":"n","lastUpdateDate":"2018-01-24T16:05:32Z"},"document":{"id":"dhid2","routeStatus":"S","lastApprovedDate":"2017-07-01T00:00:00Z"}}]}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -541,6 +541,11 @@ Content-Length: 454
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The Krew Action Item Route Log URL</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[0].creationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>class graphql.schema.GraphQLScalarType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Krew Action Item Creation Date</p></td>
+</tr>
 </tbody>
 </table>
 <div class="paragraph">
@@ -569,6 +574,11 @@ Content-Length: 454
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[0].document.routeStatus</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Document Route Status retrieved from KrewDocHdrT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[0].document.lastApprovedDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>class graphql.schema.GraphQLScalarType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Last Approved Date for Document retrieved from KrewDocHdrT</p></td>
 </tr>
 </tbody>
 </table>
@@ -614,6 +624,11 @@ Content-Length: 454
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Active Status retrieved from KrimPrncplT</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[0].initiator.lastUpdateDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>class graphql.schema.GraphQLScalarType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Last Updated Date for Document retrieved from KrewDocHdrT</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -621,7 +636,7 @@ Content-Length: 454
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-19 12:15:03 EDT
+Last updated 2018-03-19 14:42:27 EDT
 </div>
 </div>
 </body>

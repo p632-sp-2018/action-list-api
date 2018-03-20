@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.hibernate.annotations.SelectBeforeUpdate;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -17,7 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -37,13 +40,19 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import org.springframework.restdocs.payload.RequestFieldsSnippet.*;
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= {ActionListApiApplication.class})
 @TestPropertySource("classpath:application-test.properties")
 @WebAppConfiguration
-public class ActionListApiApplicationTests {
+public class ActionListApiApplicationTests extends TimeConfig{
 	
+
 	private MockMvc mockMvc;
 	
 	@Rule
@@ -65,6 +74,8 @@ public class ActionListApiApplicationTests {
 	    			.build();
 	}
 	
+
+	
 	@Test
 	public void findAllIntegrationTest() throws Exception {
 		String query ="{ "
@@ -77,6 +88,7 @@ public class ActionListApiApplicationTests {
 				+ "requestCode "
 				+ "requestLabel "
 				+ "routeLogUrl "
+				+ "creationDate "
 				
 				+ "group { "
 				+ "id "
@@ -85,6 +97,7 @@ public class ActionListApiApplicationTests {
 				+ "active "
 				+ "groupUrl "
 				+ "description "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "initiator { "
@@ -93,11 +106,13 @@ public class ActionListApiApplicationTests {
 				+ "defaultDisplayName "
 				+ "personUrl "
 				+ "active "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "document { "
 				+ "id "
 				+ "routeStatus "
+				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
 				+ " }";
@@ -116,19 +131,23 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestCode").value("A"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestLabel").value("Approve"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid1/log"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T15:50:25Z"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.id").value("a1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.name").value("nightwatchers"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.nameSpace").value("nmspc_grp1")) 
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.active").value("Y"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.groupUrl").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.description").value("Group working for UITS in OOSM course"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))         
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.universityId").value("pid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.networkId").value("prncpl1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.personUrl").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.active").value("y"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z")) 
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.id").value("dhid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.routeStatus").value("I"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
         		         		 PayloadDocumentation.relaxedResponseFields(
@@ -196,6 +215,7 @@ public class ActionListApiApplicationTests {
 				+ "requestCode "
 				+ "requestLabel "
 				+ "routeLogUrl "
+				+ "creationDate "
 				
 				+ "group { "
 				+ "id "
@@ -204,6 +224,7 @@ public class ActionListApiApplicationTests {
 				+ "active "
 				+ "groupUrl "
 				+ "description "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "initiator { "
@@ -212,11 +233,13 @@ public class ActionListApiApplicationTests {
 				+ "defaultDisplayName "
 				+ "personUrl "
 				+ "active "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "document { "
 				+ "id "
 				+ "routeStatus "
+				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
 				+ " }"; 
@@ -235,14 +258,17 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.pageKrewActionItem.[0].requestCode").value("C"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].requestLabel").value("Complete"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].group").doesNotExist())
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].creationDate").value("2018-02-13T00:29:40Z")) 
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].group").doesNotExist())     
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.universityId").value("pid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.networkId").value("prncpl2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.personUrl").doesNotExist())
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.active").value("n"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))  
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.id").value("dhid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.routeStatus").value("S"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		
          		 PayloadDocumentation.relaxedResponseFields(

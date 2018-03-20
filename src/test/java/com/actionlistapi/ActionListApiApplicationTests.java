@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.hibernate.annotations.SelectBeforeUpdate;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -17,7 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -37,13 +40,19 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.*;
 import org.springframework.restdocs.payload.RequestFieldsSnippet.*;
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= {ActionListApiApplication.class})
 @TestPropertySource("classpath:application-test.properties")
 @WebAppConfiguration
-public class ActionListApiApplicationTests {
+public class ActionListApiApplicationTests extends TimeConfig{
 	
+
 	private MockMvc mockMvc;
 	
 	@Rule
@@ -65,6 +74,8 @@ public class ActionListApiApplicationTests {
 	    			.build();
 	}
 	
+
+	
 	@Test
 	public void findAllIntegrationTest() throws Exception {
 		String query ="{ "
@@ -77,6 +88,7 @@ public class ActionListApiApplicationTests {
 				+ "requestCode "
 				+ "requestLabel "
 				+ "routeLogUrl "
+				+ "creationDate "
 				
 				+ "group { "
 				+ "id "
@@ -116,6 +128,7 @@ public class ActionListApiApplicationTests {
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestCode").value("A"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestLabel").value("Approve"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid1/log"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T15:50:25Z"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.id").value("a1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.name").value("nightwatchers"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.nameSpace").value("nmspc_grp1")) 

@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.actionlistapi.model.KrewActnItmT;
-import com.actionlistapi.repository.KrewActnItmTRepository;
-import com.actionlistapi.util.ActionListConstants;
-import com.actionlistapi.util.ActionListUtil;
+import com.actionlistapi.service.KrewActnItmService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -17,17 +15,13 @@ import graphql.schema.DataFetchingEnvironment;
 public class AllKrewActnItmTDataFetcher implements DataFetcher<List<KrewActnItmT>> {
 	
 	@Autowired
-	private KrewActnItmTRepository krewItmActnListRepository; 
+	private KrewActnItmService krewActnItmService;
 	
 	@Override
 	public List<KrewActnItmT> get(DataFetchingEnvironment env) {
 		// TODO Auto-generated method stub
-		List<KrewActnItmT> list = (List<KrewActnItmT>) krewItmActnListRepository.findAll();
-		for(KrewActnItmT k : list ) {
-			k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
-			k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
-		}
-		return list;
+		return krewActnItmService.findAllKrewActionItm();
+		
 	}
 	
 }

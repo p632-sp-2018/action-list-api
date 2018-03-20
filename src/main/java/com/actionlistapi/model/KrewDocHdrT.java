@@ -19,7 +19,7 @@ public class KrewDocHdrT implements Serializable {
     private String id;
 
     @Column(name = "DOC_HDR_STAT_CD", nullable = false, length = 1)
-    private String routeStatus;
+    private String routeStatusCode;
     
     @Column(name = "APRV_DT", nullable = true)    
     private Date lastApprovedDate;
@@ -30,6 +30,10 @@ public class KrewDocHdrT implements Serializable {
     @ManyToOne
     @JoinColumn(name = "INITR_PRNCPL_ID")
     private KrimPrncplT initiator;
+    
+    
+    @Transient
+    private String routeStatusLabel;
 
 
 	public String getId() {
@@ -40,13 +44,6 @@ public class KrewDocHdrT implements Serializable {
         this.id = id;
     }
 
-    public String getRouteStatus() {
-        return routeStatus;
-    }
-
-    public void setRouteStatus(String routeStatus) {
-        this.routeStatus = routeStatus;
-    }
 
     public Date getLastApprovedDate() {
         return lastApprovedDate;
@@ -71,4 +68,23 @@ public class KrewDocHdrT implements Serializable {
 	public void setInitiator(KrimPrncplT initiator) {
 		this.initiator = initiator;
 	}
+
+	public String getRouteStatusCode() {
+		return routeStatusCode;
+	}
+
+	public void setRouteStatusCode(String routeStatusCode) {
+		this.routeStatusCode = routeStatusCode;
+	}
+
+	public String getRouteStatusLabel() {
+		return routeStatusLabel;
+	}
+
+	public void setRouteStatusLabel(String routeStatusLabel) {
+		this.routeStatusLabel = routeStatusLabel;
+	}
+	
+	
+	
 }

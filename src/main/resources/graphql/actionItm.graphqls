@@ -9,7 +9,8 @@ type Query {
 
 type KrewDocHdrT{
 	id: ID
-	routeStatus: String
+	routeStatusCode: String
+	routeStatusLabel: String
 	lastApprovedDate: Date
 	initiator: KrimPrncplT
 }

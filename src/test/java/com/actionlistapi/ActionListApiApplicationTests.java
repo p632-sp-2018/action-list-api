@@ -215,6 +215,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "requestCode "
 				+ "requestLabel "
 				+ "routeLogUrl "
+				+ "creationDate "
 				
 				+ "group { "
 				+ "id "
@@ -223,6 +224,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "active "
 				+ "groupUrl "
 				+ "description "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "initiator { "
@@ -231,11 +233,13 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "defaultDisplayName "
 				+ "personUrl "
 				+ "active "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "document { "
 				+ "id "
 				+ "routeStatus "
+				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
 				+ " }"; 
@@ -254,14 +258,17 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.pageKrewActionItem.[0].requestCode").value("C"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].requestLabel").value("Complete"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].group").doesNotExist())
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].creationDate").value("2018-02-13T00:29:40Z")) 
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].group").doesNotExist())     
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.universityId").value("pid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.networkId").value("prncpl2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.personUrl").doesNotExist())
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.active").value("n"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))  
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.id").value("dhid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.routeStatus").value("S"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		
          		 PayloadDocumentation.relaxedResponseFields(

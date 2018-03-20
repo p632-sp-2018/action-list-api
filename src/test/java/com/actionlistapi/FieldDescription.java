@@ -69,7 +69,7 @@ public class FieldDescription {
 		return new FieldDescriptor[]{
 
         				   PayloadDocumentation.fieldWithPath("[0].document.id").description("Document Identifier retrieved from KrewDocHdrT"),
-        				   PayloadDocumentation.fieldWithPath("[0].document.routeStatus").description("Document Route Status retrieved from KrewDocHdrT"),
+        				   PayloadDocumentation.fieldWithPath("[0].document.routeStatusCode").description("Document Route Status Code retrieved from KrewDocHdrT"),
         				   PayloadDocumentation.fieldWithPath("[0].document.lastApprovedDate").type(GraphQLScalarType.class).description("Last Approved Date for Document retrieved from KrewDocHdrT")
 
     

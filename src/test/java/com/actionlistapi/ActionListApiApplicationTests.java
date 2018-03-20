@@ -111,7 +111,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				
 				+ "document { "
 				+ "id "
-				+ "routeStatus "
+				+ "routeStatusCode "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -136,17 +136,17 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.name").value("nightwatchers"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.nameSpace").value("nmspc_grp1")) 
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.active").value("Y"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.groupUrl").doesNotExist())
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.description").value("Group working for UITS in OOSM course"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))         
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.universityId").value("pid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.networkId").value("prncpl1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.personUrl").doesNotExist())
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.active").value("y"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z")) 
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.id").value("dhid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.routeStatus").value("I"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.routeStatusCode").value("I"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
@@ -238,7 +238,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				
 				+ "document { "
 				+ "id "
-				+ "routeStatus "
+				+ "routeStatusCode "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -263,11 +263,11 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.universityId").value("pid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.networkId").value("prncpl2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.personUrl").doesNotExist())
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.active").value("n"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))  
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.id").value("dhid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.routeStatus").value("S"))
+         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.routeStatusCode").value("S"))
          .andExpect(jsonPath("$.pageKrewActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		

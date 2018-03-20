@@ -97,6 +97,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "active "
 				+ "groupUrl "
 				+ "description "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "initiator { "
@@ -105,11 +106,13 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "defaultDisplayName "
 				+ "personUrl "
 				+ "active "
+				+ "lastUpdateDate "
 				+ "}"
 				
 				+ "document { "
 				+ "id "
 				+ "routeStatus "
+				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
 				+ " }";
@@ -135,13 +138,16 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.active").value("Y"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.groupUrl").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.description").value("Group working for UITS in OOSM course"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))         
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.universityId").value("pid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.networkId").value("prncpl1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.personUrl").doesNotExist())
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.active").value("y"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z")) 
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.id").value("dhid1"))
          .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.routeStatus").value("I"))
+         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z")) 
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
         		         		 PayloadDocumentation.relaxedResponseFields(

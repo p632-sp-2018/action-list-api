@@ -12,7 +12,7 @@ import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class AllKrewActnItmTDataFetcher implements DataFetcher<List<KrewActnItmT>> {
+public class AllActionItemsDataFetcher implements DataFetcher<List<KrewActnItmT>> {
 	
 	@Autowired
 	private KrewActnItmService krewActnItmService;

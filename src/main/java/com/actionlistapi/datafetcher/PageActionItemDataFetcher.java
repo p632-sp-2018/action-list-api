@@ -12,16 +12,19 @@ import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class KrewActnItmTDataFetcher implements DataFetcher<KrewActnItmT> {
+public class PageActionItemDataFetcher implements DataFetcher<Iterable<KrewActnItmT>>{
 
 	@Autowired
 	private KrewActnItmService krewActnItmService;
-
+	
 	@Override
-	public KrewActnItmT get(DataFetchingEnvironment environment) {
+	public Iterable<KrewActnItmT> get(DataFetchingEnvironment environment) {
 		// TODO Auto-generated method stub
 		Map arguments = environment.getArguments();
-		return krewActnItmService.findOneKrewActionItm((String)arguments.get("id"));
+		int offset = (int) arguments.get("offset");
+		int limit = (int) arguments.get("limit");
+		return krewActnItmService.findAllPagedKrewActnItm(offset,limit);
+		 
 	}
 
 }

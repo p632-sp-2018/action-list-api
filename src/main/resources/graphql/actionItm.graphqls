@@ -7,15 +7,15 @@ type Query {
 	pageActionItem(offset: Int!, limit: Int! ):[ActionItem]
 }
 
-type KrewDocHdrT{
+type Document{
 	id: ID
 	routeStatusCode: String
 	routeStatusLabel: String
 	lastApprovedDate: Date
-	initiator: KrimPrncplT
+	initiator: Principal
 }
 
-type KrimGrpT{
+type Group{
 	id: ID
 	name: String
 	nameSpace: String
@@ -25,7 +25,7 @@ type KrimGrpT{
 	groupUrl: String
 }
 
-type KrimPrncplT{
+type Principal{
 	universityId: ID!
 	networkId: String
 	defaultDisplayName: String
@@ -38,13 +38,13 @@ type ActionItem{
 	id :ID! 
 	documentTypeLabel : String!
 	title : String
-	document : KrewDocHdrT
+	document : Document
 	documentUrl: String!
 	documentTypeName: String!
 	requestCode: String!
 	requestLabel: String!
 	routeLogUrl: String!
-	group: KrimGrpT
-	initiator: KrimPrncplT
+	group: Group
+	initiator: Principal
 	creationDate : Date!	
 }

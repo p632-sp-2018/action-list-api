@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "krew_doc_hdr_t")
-public class KrewDocHdrT implements Serializable {
+public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,7 +29,7 @@ public class KrewDocHdrT implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "INITR_PRNCPL_ID")
-    private KrimPrncplT initiator;
+    private Principal initiator;
     
     
     @Transient
@@ -61,11 +61,11 @@ public class KrewDocHdrT implements Serializable {
 //        this.initrPrncplId = initrPrncplId;
 //    }
     
-    public KrimPrncplT getInitiator() {
+    public Principal getInitiator() {
 		return initiator;
 	}
 
-	public void setInitiator(KrimPrncplT initiator) {
+	public void setInitiator(Principal initiator) {
 		this.initiator = initiator;
 	}
 

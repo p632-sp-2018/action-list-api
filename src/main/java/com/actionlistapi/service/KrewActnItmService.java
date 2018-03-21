@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.actionlistapi.model.ActionItem;
-import com.actionlistapi.model.KrimEntityNmT;
+import com.actionlistapi.model.EntityName;
 import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -54,7 +54,7 @@ public class KrewActnItmService {
 		//k.getDocument().getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
 		
 		// Implemented to set the entity details in KrimPrncplT pojo
-		KrimEntityNmT e = k.getInitiator().getEntity();
+		EntityName e = k.getInitiator().getEntity();
 		if (e.getDefaultIndicator().equalsIgnoreCase("N") || e.getActiveIndicator().equalsIgnoreCase("N")) {
 			k.getInitiator().setDefaultDisplayName(null);
 		}

@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "krim_grp_t")
-public class KrimGrpT implements Serializable{
+public class Group implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -35,7 +35,7 @@ public class KrimGrpT implements Serializable{
     @Transient
     private String groupUrl;
 
-	public KrimGrpT() {
+	public Group() {
     }
     
     

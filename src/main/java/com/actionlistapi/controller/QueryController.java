@@ -15,16 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.actionlistapi.datafetcher.AllKrewActnItmTDataFetcher;
-import com.actionlistapi.datafetcher.KrewActnItmTDataFetcher;
-import com.actionlistapi.datafetcher.PageKrewActnItmTDataFetcher;
-import com.zhokhov.graphql.datetime.GraphQLDate;
-import com.zhokhov.graphql.datetime.GraphQLLocalDate;
-import com.zhokhov.graphql.datetime.GraphQLLocalDateTime;
+import com.actionlistapi.datafetcher.ActionItemDataFetcher;
+import com.actionlistapi.datafetcher.AllActionItemsDataFetcher;
+import com.actionlistapi.datafetcher.PageActionItemDataFetcher;
 
 import graphql.ExecutionResult;
 import graphql.GraphQL;
-import graphql.Scalars;
 import graphql.schema.GraphQLScalarType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -51,14 +47,14 @@ public class QueryController {
 
 	
 	@Autowired
-	private AllKrewActnItmTDataFetcher allKrewActnItmTDataFetcher;
+	private AllActionItemsDataFetcher allActionItemsDataFetcher;
 	
 	@Autowired
-	private KrewActnItmTDataFetcher krewActnItmDataFetcher;
+	private ActionItemDataFetcher actionItemDataFetcher;
 	
 
 	@Autowired
-	private PageKrewActnItmTDataFetcher pageKrewActnItmTDataFetcher;
+	private PageActionItemDataFetcher pageActionItemDataFetcher;
 	
 	@PostConstruct
 	public void loadSchema() throws IOException {
@@ -75,9 +71,9 @@ public class QueryController {
 
 		return RuntimeWiring.newRuntimeWiring()
 				.type("Query", typeWiring -> typeWiring
-						.dataFetcher("findAllKrewActionItem", allKrewActnItmTDataFetcher)
-						.dataFetcher("findKrewActionItem", krewActnItmDataFetcher)
-						.dataFetcher("pageKrewActionItem", pageKrewActnItmTDataFetcher))
+						.dataFetcher("findAllActionItems", allActionItemsDataFetcher)
+						.dataFetcher("findActionItem", actionItemDataFetcher)
+						.dataFetcher("pageActionItem", pageActionItemDataFetcher))
 						.scalar(Date)
 						
 				.build();

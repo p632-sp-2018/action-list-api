@@ -79,7 +79,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@Test
 	public void findAllIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "findAllKrewActionItem { "
+				+ "findAllActionItems { "
 				+ "id "
 				+ "documentTypeLabel "
 				+ "documentTypeName "
@@ -123,47 +123,47 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].id").value("aid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].documentTypeLabel").value("i20_lbl"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].documentTypeName").value("20"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].title").value("action_list"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestCode").value("A"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].requestLabel").value("Approve"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid1/log"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].creationDate").value("2018-02-09T15:50:25Z"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.id").value("a1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.name").value("nightwatchers"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.nameSpace").value("nmspc_grp1")) 
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.active").value("Y"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.description").value("Group working for UITS in OOSM course"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))         
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.universityId").value("pid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.networkId").value("prncpl1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.active").value("y"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z")) 
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.id").value("dhid1"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.routeStatusCode").value("I"))
-         .andExpect(jsonPath("$.findAllKrewActionItem.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z")) 
+         .andExpect(jsonPath("$.findAllActionItems.[0].id").value("aid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].documentTypeLabel").value("i20_lbl"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].documentTypeName").value("20"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].title").value("action_list"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestCode").value("A"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestLabel").value("Approve"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid1/log"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].creationDate").value("2018-02-09T15:50:25Z"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.id").value("a1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.name").value("nightwatchers"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.nameSpace").value("nmspc_grp1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.active").value("Y"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.description").value("Group working for UITS in OOSM course"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.universityId").value("pid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.networkId").value("prncpl1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.active").value("y"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].document.id").value("dhid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusCode").value("I"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
         		         		 PayloadDocumentation.relaxedResponseFields(
-        		         				 beneathPath("findAllKrewActionItem.").withSubsectionId("KrewActionItemTable"),
+        		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewActionItemTable"),
         		         				 FieldDescription.KrewActionItemIntegrationTestFields()),
          
         		         		 PayloadDocumentation.relaxedResponseFields(
-        		         				 beneathPath("findAllKrewActionItem.").withSubsectionId("KrewDocumentHeaderTable"),
+        		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewDocumentHeaderTable"),
         		         				 FieldDescription.KrewDocumentHeaderIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
-        		         				 beneathPath("findAllKrewActionItem.").withSubsectionId("KrimPrincipalTable"),
+        		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimPrincipalTable"),
         		         				 FieldDescription.KrimGroupIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
-        		         				 beneathPath("findAllKrewActionItem.").withSubsectionId("KrimGroupTable"),
+        		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimGroupTable"),
         		         				 FieldDescription.KrimPrincipalIntegrationTestFields())
         		 
         		 ) )
@@ -176,7 +176,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@Test
 	public void findOneIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "findKrewActionItem ( id:\"aid10\" ) " 
+				+ "findActionItem ( id:\"aid10\" ) "
 				+ "{ "
 				+ "documentTypeLabel "
 				+ "} "
@@ -188,11 +188,11 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.findKrewActionItem.documentTypeLabel").value("credit card"))
+         .andExpect(jsonPath("$.findActionItem.documentTypeLabel").value("credit card"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("findKrewActionItem").withSubsectionId("KrewActionItemTable"),
+         				 beneathPath("findActionItem").withSubsectionId("KrewActionItemTable"),
       				   PayloadDocumentation.fieldWithPath("documentTypeLabel")
       				   .description("The Krew Action Item Document Type Label"))
 
@@ -205,7 +205,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@Test
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "pageKrewActionItem ( offset: 1, limit: 1 )" 
+				+ "pageActionItem ( offset: 1, limit: 1 )"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "
@@ -250,37 +250,37 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].id").value("aid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].documentTypeLabel").value("i30_lbl"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].documentTypeName").value("40"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].title").value("data_api"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].requestCode").value("C"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].requestLabel").value("Complete"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].creationDate").value("2018-02-13T00:29:40Z")) 
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].group").doesNotExist())     
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.universityId").value("pid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.networkId").value("prncpl2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.defaultDisplayName").doesNotExist())
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.active").value("n"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))  
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.id").value("dhid2"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.routeStatusCode").value("S"))
-         .andExpect(jsonPath("$.pageKrewActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z")) 
+         .andExpect(jsonPath("$.pageActionItem.[0].id").value("aid2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].documentTypeLabel").value("i30_lbl"))
+         .andExpect(jsonPath("$.pageActionItem.[0].documentTypeName").value("40"))
+         .andExpect(jsonPath("$.pageActionItem.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].title").value("data_api"))
+         .andExpect(jsonPath("$.pageActionItem.[0].requestCode").value("C"))
+         .andExpect(jsonPath("$.pageActionItem.[0].requestLabel").value("Complete"))
+         .andExpect(jsonPath("$.pageActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
+         .andExpect(jsonPath("$.pageActionItem.[0].creationDate").value("2018-02-13T00:29:40Z"))
+         .andExpect(jsonPath("$.pageActionItem.[0].group").doesNotExist())
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.universityId").value("pid2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.networkId").value("prncpl2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.defaultDisplayName").doesNotExist())
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.active").value("n"))
+         .andExpect(jsonPath("$.pageActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))
+         .andExpect(jsonPath("$.pageActionItem.[0].document.id").value("dhid2"))
+         .andExpect(jsonPath("$.pageActionItem.[0].document.routeStatusCode").value("S"))
+         .andExpect(jsonPath("$.pageActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageKrewActionItem.").withSubsectionId("KrewActionItemTable"),
+         				 beneathPath("pageActionItem.").withSubsectionId("KrewActionItemTable"),
          				 FieldDescription.KrewActionItemIntegrationTestFields()),
 
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageKrewActionItem.").withSubsectionId("KrewDocumentHeaderTable"),
+         				 beneathPath("pageActionItem.").withSubsectionId("KrewDocumentHeaderTable"),
          				 FieldDescription.KrewDocumentHeaderIntegrationTestFields()),
          		 
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageKrewActionItem.").withSubsectionId("KrimPrincipalTable"),
+         				 beneathPath("pageActionItem.").withSubsectionId("KrimPrincipalTable"),
          				 FieldDescription.KrimPrincipalIntegrationTestFields())  
          		 
 

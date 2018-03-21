@@ -6,42 +6,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.actionlistapi.model.KrewActnItmT;
-import com.actionlistapi.model.KrimEntityNmT;
-import com.actionlistapi.repository.KrewActnItmTRepository;
+import com.actionlistapi.model.ActionItem;
+import com.actionlistapi.model.EntityName;
+import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
 
 @Service
-public class KrewActnItmService {
+public class ActionItemService {
 
 	@Autowired
-	private KrewActnItmTRepository krewItmActnListRepository;
+	private ActionItemRepository actionItemRepository;
 
-	public List<KrewActnItmT> findAllKrewActionItm() {
-		List<KrewActnItmT> list = (List<KrewActnItmT>) krewItmActnListRepository.findAll();
-		for(KrewActnItmT k : list ) {
-			setKrewActionItm(k);
+	public List<ActionItem> findAllActionItems() {
+		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll();
+		for(ActionItem k : list ) {
+			setActionItem(k);
 		}
 		return list;
 	}
 
-	public Iterable<KrewActnItmT> findAllPagedKrewActnItm(int offset, int limit) {
-		Iterable<KrewActnItmT> kList =  krewItmActnListRepository.findAll(new PageRequest(offset,limit)); 
-		for(KrewActnItmT kl : kList ) {
-			setKrewActionItm(kl);
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
+		Iterable<ActionItem> kList =  actionItemRepository.findAll(new PageRequest(offset,limit));
+		for(ActionItem kl : kList ) {
+			setActionItem(kl);
 		}
 		return kList;
 	}
 
-	public KrewActnItmT findOneKrewActionItm(String id) {
-		KrewActnItmT k = krewItmActnListRepository.findOne(id);
-		setKrewActionItm(k);
+	public ActionItem findOneActionItem(String id) {
+		ActionItem k = actionItemRepository.findOne(id);
+		setActionItem(k);
 		return k;
 
 	} 
 	
-	void setKrewActionItm(KrewActnItmT k ) {
+	void setActionItem(ActionItem k ) {
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
 		
@@ -54,7 +54,7 @@ public class KrewActnItmService {
 		//k.getDocument().getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
 		
 		// Implemented to set the entity details in KrimPrncplT pojo
-		KrimEntityNmT e = k.getInitiator().getEntity();
+		EntityName e = k.getInitiator().getEntity();
 		if (e.getDefaultIndicator().equalsIgnoreCase("N") || e.getActiveIndicator().equalsIgnoreCase("N")) {
 			k.getInitiator().setDefaultDisplayName(null);
 		}

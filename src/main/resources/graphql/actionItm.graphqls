@@ -2,9 +2,9 @@
 scalar Date
 
 type Query {
-	findAllKrewActionItem : [ActionItem]
-	findKrewActionItem(id: String):ActionItem!
-	pageKrewActionItem(offset: Int!, limit: Int! ):[ActionItem]
+	findAllActionItems : [ActionItem]
+	findActionItem(id: String):ActionItem!
+	pageActionItem(offset: Int!, limit: Int! ):[ActionItem]
 }
 
 type KrewDocHdrT{

@@ -71,9 +71,9 @@ public class QueryController {
 
 		return RuntimeWiring.newRuntimeWiring()
 				.type("Query", typeWiring -> typeWiring
-						.dataFetcher("findAllKrewActionItem", allActionItemsDataFetcher)
-						.dataFetcher("findKrewActionItem", actionItemDataFetcher)
-						.dataFetcher("pageKrewActionItem", pageActionItemDataFetcher))
+						.dataFetcher("findAllActionItems", allActionItemsDataFetcher)
+						.dataFetcher("findActionItem", actionItemDataFetcher)
+						.dataFetcher("pageActionItem", pageActionItemDataFetcher))
 						.scalar(Date)
 						
 				.build();

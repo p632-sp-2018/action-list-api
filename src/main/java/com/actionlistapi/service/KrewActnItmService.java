@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.actionlistapi.model.KrewActnItmT;
+import com.actionlistapi.model.ActionItem;
 import com.actionlistapi.model.KrimEntityNmT;
-import com.actionlistapi.repository.KrewActnItmTRepository;
+import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
 
@@ -16,32 +16,32 @@ import com.actionlistapi.util.ActionListUtil;
 public class KrewActnItmService {
 
 	@Autowired
-	private KrewActnItmTRepository krewItmActnListRepository;
+	private ActionItemRepository actionItemRepository;
 
-	public List<KrewActnItmT> findAllKrewActionItm() {
-		List<KrewActnItmT> list = (List<KrewActnItmT>) krewItmActnListRepository.findAll();
-		for(KrewActnItmT k : list ) {
+	public List<ActionItem> findAllKrewActionItm() {
+		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll();
+		for(ActionItem k : list ) {
 			setKrewActionItm(k);
 		}
 		return list;
 	}
 
-	public Iterable<KrewActnItmT> findAllPagedKrewActnItm(int offset, int limit) {
-		Iterable<KrewActnItmT> kList =  krewItmActnListRepository.findAll(new PageRequest(offset,limit)); 
-		for(KrewActnItmT kl : kList ) {
+	public Iterable<ActionItem> findAllPagedKrewActnItm(int offset, int limit) {
+		Iterable<ActionItem> kList =  actionItemRepository.findAll(new PageRequest(offset,limit));
+		for(ActionItem kl : kList ) {
 			setKrewActionItm(kl);
 		}
 		return kList;
 	}
 
-	public KrewActnItmT findOneKrewActionItm(String id) {
-		KrewActnItmT k = krewItmActnListRepository.findOne(id);
+	public ActionItem findOneKrewActionItm(String id) {
+		ActionItem k = actionItemRepository.findOne(id);
 		setKrewActionItm(k);
 		return k;
 
 	} 
 	
-	void setKrewActionItm(KrewActnItmT k ) {
+	void setKrewActionItm(ActionItem k ) {
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
 		

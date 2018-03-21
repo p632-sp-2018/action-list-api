@@ -2,9 +2,9 @@
 scalar Date
 
 type Query {
-	findAllKrewActionItem : [KrewActnItmT]
-	findKrewActionItem(id: String):KrewActnItmT!
-	pageKrewActionItem(offset: Int!, limit: Int! ):[KrewActnItmT]
+	findAllKrewActionItem : [ActionItem]
+	findKrewActionItem(id: String):ActionItem!
+	pageKrewActionItem(offset: Int!, limit: Int! ):[ActionItem]
 }
 
 type KrewDocHdrT{
@@ -34,7 +34,7 @@ type KrimPrncplT{
 	lastUpdateDate: Date
 }
 
-type KrewActnItmT{
+type ActionItem{
 	id :ID! 
 	documentTypeLabel : String!
 	title : String

@@ -13,7 +13,7 @@ import com.actionlistapi.util.ActionListUtil;
  */
 @Entity
 @Table(name="KREW_ACTN_ITM_T")
-public class KrewActnItmT implements Serializable {
+public class ActionItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -65,7 +65,7 @@ public class KrewActnItmT implements Serializable {
 	@Transient
 	private String routeLogUrl;
 
-	public KrewActnItmT() {
+	public ActionItem() {
 	}
 
 	public String getId() {

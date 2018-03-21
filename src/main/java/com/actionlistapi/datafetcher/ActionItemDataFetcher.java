@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.actionlistapi.model.ActionItem;
-import com.actionlistapi.service.KrewActnItmService;
+import com.actionlistapi.service.ActionItemService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -15,13 +15,13 @@ import graphql.schema.DataFetchingEnvironment;
 public class ActionItemDataFetcher implements DataFetcher<ActionItem> {
 
 	@Autowired
-	private KrewActnItmService krewActnItmService;
+	private ActionItemService actionItemService;
 
 	@Override
 	public ActionItem get(DataFetchingEnvironment environment) {
 		// TODO Auto-generated method stub
 		Map arguments = environment.getArguments();
-		return krewActnItmService.findOneKrewActionItm((String)arguments.get("id"));
+		return actionItemService.findOneActionItem((String)arguments.get("id"));
 	}
 
 }

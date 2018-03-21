@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.actionlistapi.model.ActionItem;
-import com.actionlistapi.service.KrewActnItmService;
+import com.actionlistapi.service.ActionItemService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -15,7 +15,7 @@ import graphql.schema.DataFetchingEnvironment;
 public class PageActionItemDataFetcher implements DataFetcher<Iterable<ActionItem>>{
 
 	@Autowired
-	private KrewActnItmService krewActnItmService;
+	private ActionItemService actionItemService;
 	
 	@Override
 	public Iterable<ActionItem> get(DataFetchingEnvironment environment) {
@@ -23,7 +23,7 @@ public class PageActionItemDataFetcher implements DataFetcher<Iterable<ActionIte
 		Map arguments = environment.getArguments();
 		int offset = (int) arguments.get("offset");
 		int limit = (int) arguments.get("limit");
-		return krewActnItmService.findAllPagedKrewActnItm(offset,limit);
+		return actionItemService.findAllPagedActionItems(offset,limit);
 		 
 	}
 

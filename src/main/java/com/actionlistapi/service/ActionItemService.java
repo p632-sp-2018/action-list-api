@@ -13,35 +13,35 @@ import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
 
 @Service
-public class KrewActnItmService {
+public class ActionItemService {
 
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllKrewActionItm() {
+	public List<ActionItem> findAllActionItems() {
 		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll();
 		for(ActionItem k : list ) {
-			setKrewActionItm(k);
+			setActionItem(k);
 		}
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedKrewActnItm(int offset, int limit) {
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
 		Iterable<ActionItem> kList =  actionItemRepository.findAll(new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
-			setKrewActionItm(kl);
+			setActionItem(kl);
 		}
 		return kList;
 	}
 
-	public ActionItem findOneKrewActionItm(String id) {
+	public ActionItem findOneActionItem(String id) {
 		ActionItem k = actionItemRepository.findOne(id);
-		setKrewActionItm(k);
+		setActionItem(k);
 		return k;
 
 	} 
 	
-	void setKrewActionItm(ActionItem k ) {
+	void setActionItem(ActionItem k ) {
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
 		

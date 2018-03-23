@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.actionlistapi.model.KrewActnItmT;
@@ -20,8 +22,11 @@ public class KrewActnItmService {
 
 	public List<KrewActnItmT> findAllKrewActionItm() {
 		List<KrewActnItmT> list = (List<KrewActnItmT>) krewItmActnListRepository.findAll();
+		String name = getAuthenticateUser();
 		for(KrewActnItmT k : list ) {
-			setKrewActionItm(k);
+			if(name.equals(k.getInitiator().getUniversityId())) {
+				setKrewActionItm(k);
+			}
 		}
 		return list;
 	}
@@ -64,6 +69,12 @@ public class KrewActnItmService {
 		
 		k.getDocument().setRouteStatusLabel(ActionListUtil.getRouteStatusLabel(k.getDocument().getRouteStatusCode()));
 
+	}
+	
+	String getAuthenticateUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		return name;
 	}
 	
 	

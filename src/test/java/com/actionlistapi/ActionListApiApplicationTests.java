@@ -297,20 +297,8 @@ public class ActionListApiApplicationTests extends TimeConfig{
     private ResultActions performGraphQlPost(String query, Map variables) throws Exception {
         return mockMvc.perform(post("/graphql")
                 .contentType(MediaType.APPLICATION_JSON)
-       //         .content(generateRequest(query, variables))
                 .content(query)
         );
     }
 
-    private String generateRequest(String query, Map variables) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("query", query);
-
-        if (variables != null) {
-            jsonObject.put("variables", Collections.singletonMap("input", variables));
-        }
-
-        return jsonObject.toString();
-    }
-}
+   }

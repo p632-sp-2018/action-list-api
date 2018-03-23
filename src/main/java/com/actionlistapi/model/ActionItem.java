@@ -13,7 +13,7 @@ import com.actionlistapi.util.ActionListUtil;
  */
 @Entity
 @Table(name="KREW_ACTN_ITM_T")
-public class KrewActnItmT implements Serializable {
+public class ActionItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -40,21 +40,21 @@ public class KrewActnItmT implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="GRP_ID")
-	private KrimGrpT group;
+	private Group group;
 
 //	@Column(name="PRNCPL_ID", updatable=false)
 //	private String principalId;
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
-	private KrimPrncplT initiator;
+	private Principal initiator;
 
 //	@Column(name="DOC_HDR_ID", nullable=false, length=40)
 //	private String documentId;
 	
 	@ManyToOne
 	@JoinColumn(name="DOC_HDR_ID")
-	private KrewDocHdrT document;
+	private Document document;
 
 	@Column(name="RQST_CD", nullable=false, length=1)
 	private String requestCode;
@@ -65,7 +65,7 @@ public class KrewActnItmT implements Serializable {
 	@Transient
 	private String routeLogUrl;
 
-	public KrewActnItmT() {
+	public ActionItem() {
 	}
 
 	public String getId() {
@@ -124,11 +124,11 @@ public class KrewActnItmT implements Serializable {
 //		this.grpId = grpId;
 //	}
 
-	public KrimGrpT getGroup() {
+	public Group getGroup() {
 		return group;
 	}
 
-	public void setGroup(KrimGrpT group) {
+	public void setGroup(Group group) {
 		this.group = group;
 	}
 
@@ -140,11 +140,11 @@ public class KrewActnItmT implements Serializable {
 //		this.principalId = principalId;
 //	}
 
-	public KrimPrncplT getInitiator() {
+	public Principal getInitiator() {
 		return initiator;
 	}
 
-	public void setInitiator(KrimPrncplT initiator) {
+	public void setInitiator(Principal initiator) {
 		this.initiator = initiator;
 	}
 	
@@ -156,11 +156,11 @@ public class KrewActnItmT implements Serializable {
 //		this.documentId = documentId;
 //	}
 
-	public KrewDocHdrT getDocument() {
+	public Document getDocument() {
 		return document;
 	}
 
-	public void setDocument(KrewDocHdrT document) {
+	public void setDocument(Document document) {
 		this.document = document;
 	}
 	

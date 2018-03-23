@@ -17,6 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -28,6 +30,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.actionlistapi.config.SecurityConfig;
 
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
@@ -297,20 +301,8 @@ public class ActionListApiApplicationTests extends TimeConfig{
     private ResultActions performGraphQlPost(String query, Map variables) throws Exception {
         return mockMvc.perform(post("/graphql")
                 .contentType(MediaType.APPLICATION_JSON)
-       //         .content(generateRequest(query, variables))
                 .content(query)
         );
     }
 
-    private String generateRequest(String query, Map variables) throws JSONException {
-        JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("query", query);
-
-        if (variables != null) {
-            jsonObject.put("variables", Collections.singletonMap("input", variables));
-        }
-
-        return jsonObject.toString();
-    }
-}
+   }

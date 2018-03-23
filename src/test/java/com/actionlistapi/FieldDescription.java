@@ -26,9 +26,9 @@ public class FieldDescription {
 //    }
 
     
-//	PayloadDocumentation.fieldWithPath("findKrewActionItem.id").description("The Krew Action Item Document type Label")
-//        				PayloadDocumentation.fieldWithPath("findKrewActionItem.creationDate").type(GraphQLScalarType.class).description("The Krew Action Item Creation Date")
-//                  		PayloadDocumentation.fieldWithPath("findKrewActionItem.id").description("The Krew Action Item Identifier")
+//	PayloadDocumentation.fieldWithPath("findActionItem.id").description("The Krew Action Item Document type Label")
+//        				PayloadDocumentation.fieldWithPath("findActionItem.creationDate").type(GraphQLScalarType.class).description("The Krew Action Item Creation Date")
+//                  		PayloadDocumentation.fieldWithPath("findActionItem.id").description("The Krew Action Item Identifier")
     
 
 	

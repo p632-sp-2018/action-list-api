@@ -431,7 +431,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/graphql' -i -X POST \
     -H 'Content-Type: application/json' \
-    -d '{ findKrewActionItem ( id:"aid10" ) { documentTypeLabel } }'</code></pre>
+    -d '{ findActionItem ( id:"aid10" ) { documentTypeLabel } }'</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -444,7 +444,7 @@ Content-Type: application/json
 Host: localhost:8080
 Content-Length: 59
 
-{ findKrewActionItem ( id:"aid10" ) { documentTypeLabel } }</code></pre>
+{ findActionItem ( id:"aid10" ) { documentTypeLabel } }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -456,7 +456,7 @@ Content-Length: 59
 Content-Type: application/json;charset=UTF-8
 Content-Length: 58
 
-{"findKrewActionItem":{"documentTypeLabel":"credit card"}}</code></pre>
+{"findActionItem":{"documentTypeLabel":"credit card"}}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -464,7 +464,7 @@ Content-Length: 58
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{ findKrewActionItem ( id:"aid10" ) { documentTypeLabel } }</code></pre>
+<pre class="highlight nowrap"><code>{ findActionItem ( id:"aid10" ) { documentTypeLabel } }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -472,7 +472,7 @@ Content-Length: 58
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{ findKrewActionItem ( id:"aid10" ) { documentTypeLabel } }' | http POST 'http://localhost:8080/graphql' \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ echo '{ findActionItem ( id:"aid10" ) { documentTypeLabel } }' | http POST 'http://localhost:8080/graphql' \
     'Content-Type:application/json'</code></pre>
 </div>
 </div>
@@ -481,7 +481,7 @@ Content-Length: 58
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight nowrap"><code>{"findKrewActionItem":{"documentTypeLabel":"credit card"}}</code></pre>
+<pre class="highlight nowrap"><code>{"findActionItem":{"documentTypeLabel":"credit card"}}</code></pre>
 </div>
 </div>
 <div class="paragraph">

@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "krim_entity_nm_t")
-public class KrimEntityNmT implements Serializable {
+public class EntityName implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id

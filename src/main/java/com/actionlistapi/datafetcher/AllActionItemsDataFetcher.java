@@ -5,22 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.actionlistapi.model.KrewActnItmT;
-import com.actionlistapi.service.KrewActnItmService;
+import com.actionlistapi.model.ActionItem;
+import com.actionlistapi.service.ActionItemService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class AllKrewActnItmTDataFetcher implements DataFetcher<List<KrewActnItmT>> {
+public class AllActionItemsDataFetcher implements DataFetcher<List<ActionItem>> {
 	
 	@Autowired
-	private KrewActnItmService krewActnItmService;
+	private ActionItemService actionItemService;
 	
 	@Override
-	public List<KrewActnItmT> get(DataFetchingEnvironment env) {
+	public List<ActionItem> get(DataFetchingEnvironment env) {
 		// TODO Auto-generated method stub
-		return krewActnItmService.findAllKrewActionItm();
+		return actionItemService.findAllActionItems();
 		
 	}
 	

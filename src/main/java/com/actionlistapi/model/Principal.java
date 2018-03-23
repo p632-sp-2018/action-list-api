@@ -10,8 +10,8 @@ import java.util.Date;
  */
 @Entity
 @Table(name="krim_prncpl_t")
-@NamedQuery(name="KrimPrncplT.findAll", query="SELECT k FROM KrimPrncplT k")
-public class KrimPrncplT implements Serializable {
+@NamedQuery(name="Principal.findAll", query="SELECT k FROM Principal k")
+public class Principal implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +23,7 @@ public class KrimPrncplT implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="ENTITY_ID")
-	private KrimEntityNmT entity;
+	private EntityName entity;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="LAST_UPDT_DT")
@@ -38,7 +38,7 @@ public class KrimPrncplT implements Serializable {
 	@Transient
 	private String personUrl;
 
-	public KrimPrncplT() {
+	public Principal() {
 	}
 
 	public String getUniversityId() {
@@ -57,11 +57,11 @@ public class KrimPrncplT implements Serializable {
 		this.active = actvInd;
 	}
 
-	public KrimEntityNmT getEntity() {
+	public EntityName getEntity() {
 		return entity;
 	}
 
-	public void setEntity(KrimEntityNmT entity) {
+	public void setEntity(EntityName entity) {
 		this.entity = entity;
 	}
 

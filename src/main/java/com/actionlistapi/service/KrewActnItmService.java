@@ -22,11 +22,8 @@ public class KrewActnItmService {
 
 	public List<KrewActnItmT> findAllKrewActionItm() {
 		List<KrewActnItmT> list = (List<KrewActnItmT>) krewItmActnListRepository.findAll();
-		String name = getAuthenticateUser();
 		for(KrewActnItmT k : list ) {
-			if(name.equals(k.getInitiator().getUniversityId())) {
-				setKrewActionItm(k);
-			}
+			setKrewActionItm(k);
 		}
 		return list;
 	}
@@ -76,8 +73,5 @@ public class KrewActnItmService {
 		String name = auth.getName();
 		return name;
 	}
-	
-	
-	
 	
 }

@@ -1,9 +1,7 @@
 package com.actionlistapi;
 
 import org.springframework.restdocs.payload.FieldDescriptor;
-
 import org.springframework.restdocs.payload.PayloadDocumentation;
-import org.springframework.restdocs.payload.RequestFieldsSnippet;
 
 import graphql.schema.GraphQLScalarType;
 

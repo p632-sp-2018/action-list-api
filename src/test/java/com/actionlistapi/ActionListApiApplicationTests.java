@@ -1,28 +1,25 @@
 package com.actionlistapi;
 
+import static org.springframework.restdocs.payload.PayloadDocumentation.beneathPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 
-import org.hibernate.annotations.SelectBeforeUpdate;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.restdocs.JUnitRestDocumentation;
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.payload.PayloadDocumentation;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -30,23 +27,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.actionlistapi.config.SecurityConfig;
-
-import org.springframework.restdocs.JUnitRestDocumentation;
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.restdocs.payload.PayloadDocumentation;
-import org.springframework.restdocs.payload.ResponseFieldsSnippet;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.http.HttpMethod;
-import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
-import org.springframework.restdocs.payload.RequestFieldsSnippet.*;
-import java.util.TimeZone;
-
-import javax.annotation.PostConstruct;
 
 
 
@@ -81,6 +61,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 
 	
 	@Test
+	@WithMockUser(username="pid1",roles="USER")
 	public void findAllIntegrationTest() throws Exception {
 		String query ="{ "
 				+ "findAllActionItems { "
@@ -178,6 +159,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	}
 	
 	@Test
+	@WithMockUser(username="pid1",roles="USER")
 	public void findOneIntegrationTest() throws Exception {
 		String query ="{ "
 				+ "findActionItem ( id:\"aid10\" ) "
@@ -207,6 +189,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	}
 	
 	@Test
+	@WithMockUser(username="pid1",roles="USER")
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
 				+ "pageActionItem ( offset: 1, limit: 1 )"

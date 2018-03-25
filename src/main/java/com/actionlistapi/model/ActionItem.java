@@ -2,10 +2,14 @@ package com.actionlistapi.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
-import com.actionlistapi.util.ActionListConstants;
-import com.actionlistapi.util.ActionListUtil;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * The persistent class for the KREW_ACTN_ITM_T database table.

@@ -97,6 +97,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "document { "
 				+ "id "
 				+ "routeStatusCode "
+				+ "routeStatusLabel "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -132,6 +133,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findAllActionItems.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.id").value("dhid1"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusCode").value("I"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusLabel").value("Initiated"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
@@ -189,10 +191,10 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	}
 	
 	@Test
-	@WithMockUser(username="pid1",roles="USER")
+	@WithMockUser(username="pid2",roles="USER")
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "pageActionItem ( offset: 1, limit: 1 )"
+				+ "pageActionItems ( offset: 0, limit: 1 )"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "
@@ -226,6 +228,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "document { "
 				+ "id "
 				+ "routeStatusCode "
+				+ "routeStatusLabel "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -237,37 +240,38 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
-         .andExpect(jsonPath("$.pageActionItem.[0].id").value("aid2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].documentTypeLabel").value("i30_lbl"))
-         .andExpect(jsonPath("$.pageActionItem.[0].documentTypeName").value("40"))
-         .andExpect(jsonPath("$.pageActionItem.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].title").value("data_api"))
-         .andExpect(jsonPath("$.pageActionItem.[0].requestCode").value("C"))
-         .andExpect(jsonPath("$.pageActionItem.[0].requestLabel").value("Complete"))
-         .andExpect(jsonPath("$.pageActionItem.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
-         .andExpect(jsonPath("$.pageActionItem.[0].creationDate").value("2018-02-13T00:29:40Z"))
-         .andExpect(jsonPath("$.pageActionItem.[0].group").doesNotExist())
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.universityId").value("pid2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.networkId").value("prncpl2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.defaultDisplayName").doesNotExist())
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.active").value("n"))
-         .andExpect(jsonPath("$.pageActionItem.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))
-         .andExpect(jsonPath("$.pageActionItem.[0].document.id").value("dhid2"))
-         .andExpect(jsonPath("$.pageActionItem.[0].document.routeStatusCode").value("S"))
-         .andExpect(jsonPath("$.pageActionItem.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
+         .andExpect(jsonPath("$.pageActionItems.[0].id").value("aid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].documentTypeLabel").value("i30_lbl"))
+         .andExpect(jsonPath("$.pageActionItems.[0].documentTypeName").value("40"))
+         .andExpect(jsonPath("$.pageActionItems.[0].documentUrl").value("http://localhost:8080/workflow/documents/aid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].title").value("data_api"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestCode").value("C"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestLabel").value("Complete"))
+         .andExpect(jsonPath("$.pageActionItems.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
+         .andExpect(jsonPath("$.pageActionItems.[0].creationDate").value("2018-02-13T00:29:40Z"))
+         .andExpect(jsonPath("$.pageActionItems.[0].group").doesNotExist())
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.universityId").value("pid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.networkId").value("prncpl2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.defaultDisplayName").doesNotExist())
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.active").value("n"))
+         .andExpect(jsonPath("$.pageActionItems.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))
+         .andExpect(jsonPath("$.pageActionItems.[0].document.id").value("dhid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusCode").value("S"))
+         .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusLabel").value("Saved"))
+         .andExpect(jsonPath("$.pageActionItems.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageActionItem.").withSubsectionId("KrewActionItemTable"),
+         				 beneathPath("pageActionItems.").withSubsectionId("KrewActionItemTable"),
          				 FieldDescription.KrewActionItemIntegrationTestFields()),
 
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageActionItem.").withSubsectionId("KrewDocumentHeaderTable"),
+         				 beneathPath("pageActionItems.").withSubsectionId("KrewDocumentHeaderTable"),
          				 FieldDescription.KrewDocumentHeaderIntegrationTestFields()),
          		 
          		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("pageActionItem.").withSubsectionId("KrimPrincipalTable"),
+         				 beneathPath("pageActionItems.").withSubsectionId("KrimPrincipalTable"),
          				 FieldDescription.KrimPrincipalIntegrationTestFields())  
          		 
 

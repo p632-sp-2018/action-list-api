@@ -4,7 +4,7 @@ scalar Date
 type Query {
 	findAllActionItems : [ActionItem]
 	findActionItem(id: String):ActionItem!
-	pageActionItem(offset: Int!, limit: Int! ):[ActionItem]
+	pageActionItems(offset: Int!, limit: Int! ):[ActionItem]
 }
 
 type Document{

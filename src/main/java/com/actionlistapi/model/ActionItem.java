@@ -46,8 +46,8 @@ public class ActionItem implements Serializable {
 	@JoinColumn(name="GRP_ID")
 	private Group group;
 
-//	@Column(name="PRNCPL_ID", updatable=false)
-//	private String principalId;
+	@Column(name="PRNCPL_ID", updatable=false, insertable=false)
+	private String principalId;
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
@@ -136,13 +136,13 @@ public class ActionItem implements Serializable {
 		this.group = group;
 	}
 
-//	public String getPrncplId() {
-//		return this.principalId;
-//	}
+	public String getPrincipalId() {
+		return this.principalId;
+	}
 
-//	public void setPrncplId(String principalId) {
-//		this.principalId = principalId;
-//	}
+	public void setPrincipalId(String principalId) {
+		this.principalId = principalId;
+	}
 
 	public Principal getInitiator() {
 		return initiator;

@@ -97,6 +97,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "document { "
 				+ "id "
 				+ "routeStatusCode "
+				+ "routeStatusLabel "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -132,6 +133,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findAllActionItems.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.id").value("dhid1"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusCode").value("I"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusLabel").value("Initiated"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.lastApprovedDate").value("2017-06-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
         		         		
@@ -189,10 +191,10 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	}
 	
 	@Test
-	@WithMockUser(username="pid1",roles="USER")
+	@WithMockUser(username="pid2",roles="USER")
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "pageActionItems ( offset: 1, limit: 1 )"
+				+ "pageActionItems ( offset: 0, limit: 1 )"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "
@@ -226,6 +228,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "document { "
 				+ "id "
 				+ "routeStatusCode "
+				+ "routeStatusLabel "
 				+ "lastApprovedDate"
 				+ " }"
 				+ " }"
@@ -255,6 +258,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.pageActionItems.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.id").value("dhid2"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusCode").value("S"))
+         .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusLabel").value("Saved"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
 	         		

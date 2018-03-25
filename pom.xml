@@ -96,7 +96,7 @@
 			<type>pom</type>
 		</dependency>
 
-
+<!-- Spring Rest Docs Dependencies -->
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
@@ -110,6 +110,13 @@
 			<version>1.2.1.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
+	
+		<dependency>
+			<groupId>capital.scalable</groupId>
+			<artifactId>spring-auto-restdocs-core</artifactId>
+ 			<version>2.0.0</version> 
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -120,12 +127,12 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
-			<version>4.0.0.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 
 
 	</dependencies>
+	
 	<repositories>
 		<repository>
 			<id>jcenter</id>
@@ -135,110 +142,156 @@
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-		<plugins>
+		<pluginManagement>	
+			<plugins>
 
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<includeSystemScope>true</includeSystemScope>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>3.4.1</version>
-				<configuration>
-					<propertyFile>src/main/resources/liquibase.properties</propertyFile>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.liquibase.ext</groupId>
-						<artifactId>liquibase-hibernate4</artifactId>
-						<version>3.5</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.3</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html</backend>
-							<doctype>book</doctype>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework.restdocs</groupId>
-						<artifactId>spring-restdocs-asciidoctor</artifactId>
-						<version>1.2.1.RELEASE</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.7</version>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.outputDirectory}/static/docs
-							</outputDirectory>
-							<resources>
-								<resource>
-									<directory>
-										${project.build.directory}/generated-docs
-									</directory>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.9</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-		</plugins>
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<includes>
+							<include>**/*Test.java</include>
+						</includes>
+						<systemPropertyVariables>
+							<org.springframework.restdocs.outputDir>
+								${project.build.directory}/generated-snippets
+							</org.springframework.restdocs.outputDir>
+							<org.springframework.restdocs.javadocJsonDir>
+								${project.build.directory}/generated-javadoc-json
+							</org.springframework.restdocs.javadocJsonDir>
+						</systemPropertyVariables>
+					</configuration>
+				</plugin>
+		
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<id>generate-javadoc-json</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>javadoc-no-fork</goal>
+							</goals>
+							<configuration>
+								<doclet>capital.scalable.restdocs.jsondoclet.ExtractDocumentationAsJsonDoclet</doclet>
+								<docletArtifact>
+									<groupId>capital.scalable</groupId>
+									<artifactId>spring-auto-restdocs-json-doclet</artifactId>
+									<version>2.0.0</version>
+								</docletArtifact>
+								<destDir>generated-javadoc-json</destDir>
+								<reportOutputDirectory>${project.build.directory}</reportOutputDirectory>
+								<useStandardDocletOptions>false</useStandardDocletOptions>
+								<show>package</show>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+		
+		
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<includeSystemScope>true</includeSystemScope>
+					</configuration>
+				</plugin>
+		
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>3.4.1</version>
+					<configuration>
+						<propertyFile>src/main/resources/liquibase.properties</propertyFile>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.liquibase.ext</groupId>
+							<artifactId>liquibase-hibernate4</artifactId>
+							<version>3.5</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+		
+				<plugin>
+					<groupId>org.asciidoctor</groupId>
+					<artifactId>asciidoctor-maven-plugin</artifactId>
+					<version>1.5.3</version>
+					<executions>
+						<execution>
+							<id>generate-docs</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>process-asciidoc</goal>
+							</goals>
+							<configuration>
+								<backend>html</backend>
+								<doctype>book</doctype>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.springframework.restdocs</groupId>
+							<artifactId>spring-restdocs-asciidoctor</artifactId>
+							<version>1.2.1.RELEASE</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+		
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.7</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>
+									${project.build.outputDirectory}/static/docs
+								</outputDirectory>
+								<resources>
+									<resource>
+										<directory>
+											${project.build.directory}/generated-docs
+										</directory>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+		
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.9</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+		
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+		
+			</plugins>
+		</pluginManagement>	
 	</build>
 
 

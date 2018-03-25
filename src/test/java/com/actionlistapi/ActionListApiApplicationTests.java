@@ -17,7 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
+import org.springframework.restdocs.cli.CliDocumentation;
+import org.springframework.restdocs.http.HttpDocumentation;
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.operation.preprocess.Preprocessors;
 import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
@@ -28,6 +31,12 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import capital.scalable.restdocs.AutoDocumentation;
+import capital.scalable.restdocs.jackson.JacksonResultHandlers;
+import capital.scalable.restdocs.response.ResponseModifyingPreprocessors;
+
 
 
 @RunWith(SpringRunner.class)
@@ -36,15 +45,16 @@ import org.springframework.web.context.WebApplicationContext;
 @WebAppConfiguration
 public class ActionListApiApplicationTests extends TimeConfig{
 	
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+	
+	@Autowired
+	protected ObjectMapper objectMapper;
 
-	private MockMvc mockMvc;
+	protected MockMvc mockMvc;
 	
 	@Rule
 	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation();
-	
-	
-	@Autowired
-	private WebApplicationContext webApplicationContext;
 
 	@Test
 	public void contextLoads() {
@@ -54,7 +64,32 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	public void setUp() throws IOException {
 		
 	    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-	    			.apply(MockMvcRestDocumentation.documentationConfiguration(this.restDocumentation))
+	    			.alwaysDo(JacksonResultHandlers.prepareJackson(objectMapper))
+	    			.alwaysDo(MockMvcRestDocumentation.document("{class-name}/{method-name}",
+	    					Preprocessors.preprocessRequest(),
+	    					Preprocessors.preprocessResponse(
+	    							
+	    							ResponseModifyingPreprocessors.replaceBinaryContent(),
+	    							
+	    							ResponseModifyingPreprocessors.limitJsonArrayLength(objectMapper),
+	    							Preprocessors.prettyPrint())))
+	    			
+	    			.apply(MockMvcRestDocumentation.documentationConfiguration(this.restDocumentation)
+	    					.uris()
+	    					.withScheme("http")
+	    					.withHost("localhost")
+	    					.withPort(8080)
+	    					.and().snippets()
+	    					.withDefaults(CliDocumentation.curlRequest(),
+	    							HttpDocumentation.httpRequest(),
+	    							HttpDocumentation.httpResponse(),
+	    							AutoDocumentation.requestFields(),
+	    							AutoDocumentation.responseFields(),
+	    							AutoDocumentation.pathParameters(),
+	    							AutoDocumentation.requestParameters(),
+	    							AutoDocumentation.description(),
+	    							AutoDocumentation.methodAndPath(),
+	    							AutoDocumentation.section()))
 	    			.build();
 	}
 	

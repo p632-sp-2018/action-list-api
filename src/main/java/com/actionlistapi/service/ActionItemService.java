@@ -21,7 +21,7 @@ public class ActionItemService {
 	private ActionItemRepository actionItemRepository;
 
 	public List<ActionItem> findAllActionItems() {
-		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll();
+		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAllByPrincipalId(getAuthenticateUser());
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
@@ -29,7 +29,7 @@ public class ActionItemService {
 	}
 
 	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
-		Iterable<ActionItem> kList =  actionItemRepository.findAll(new PageRequest(offset,limit));
+		Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}
@@ -37,7 +37,7 @@ public class ActionItemService {
 	}
 
 	public ActionItem findOneActionItem(String id) {
-		ActionItem k = actionItemRepository.findOne(id);
+		ActionItem k = actionItemRepository.findByIdAndPrincipalId(id, getAuthenticateUser());
 		setActionItem(k);
 		return k;
 

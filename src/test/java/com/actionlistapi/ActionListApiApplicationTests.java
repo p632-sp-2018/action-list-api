@@ -237,13 +237,11 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findActionItem.document.routeStatusLabel").value("Saved"))
          .andExpect(jsonPath("$.findActionItem.document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
-	         		
-	         		
-         		 PayloadDocumentation.relaxedResponseFields(
+
+         		 PayloadDocumentation.responseFields(
          				 beneathPath("findActionItem.").withSubsectionId("KrewActionItemTable"),
          				 FieldDescription.FindActionItemIntegrationTestFields())
 
- 
         		 ) )
          ;
 		

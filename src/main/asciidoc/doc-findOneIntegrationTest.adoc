@@ -1,4 +1,4 @@
-== Test case Document for Retrieving a single Item based on its identifier -findOneIntegrationTest Document
+== Test case Document for Retrieving a single Item based on its identifier
 
 
 Example of curl command:

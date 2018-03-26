@@ -140,18 +140,18 @@ public class ActionListApiApplicationTests extends TimeConfig{
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewActionItemTable"),
         		         				 FieldDescription.KrewActionItemIntegrationTestFields()),
-         
+
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewDocumentHeaderTable"),
         		         				 FieldDescription.KrewDocumentHeaderIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimPrincipalTable"),
-        		         				 FieldDescription.KrimGroupIntegrationTestFields()),
+        		         				 FieldDescription.KrimPrincipalIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimGroupTable"),
-        		         				 FieldDescription.KrimPrincipalIntegrationTestFields())
+        		         				 FieldDescription.KrimGroupIntegrationTestFields())
         		 
         		 ) )
          ;

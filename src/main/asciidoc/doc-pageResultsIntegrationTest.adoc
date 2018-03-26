@@ -1,4 +1,4 @@
-== Test case Document for paginating Retrieved Items -PageResultsIntegrationTest Document
+== Test case Document for paginating Retrieved Items
 
 
 Example of curl command:
@@ -23,11 +23,13 @@ include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/htt
 Response body:
 include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/response-body.adoc[]
 
-Response fields for Krew Action Item Table - KrewActnItmT :
-include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/response-fields-KrewActionItemTable.adoc[]
+Some Basic Response fields:
+include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewActionItemTable.adoc[]
 
-Response fields for Krew Document Header Table - KrewDocHdrT :
-include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/response-fields-KrewDocumentHeaderTable.adoc[]
+Response fields related to document:
+include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewDocumentHeaderTable.adoc[]
 
-Response fields for Krim Principal Table - KrimPrncplT :
-include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/response-fields-KrimPrincipalTable.adoc[]
+Response fields related to Person or Initiator:
+include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimPrincipalTable.adoc[]
+
+

@@ -140,18 +140,18 @@ public class ActionListApiApplicationTests extends TimeConfig{
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewActionItemTable"),
         		         				 FieldDescription.KrewActionItemIntegrationTestFields()),
-         
+
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrewDocumentHeaderTable"),
         		         				 FieldDescription.KrewDocumentHeaderIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimPrincipalTable"),
-        		         				 FieldDescription.KrimGroupIntegrationTestFields()),
+        		         				 FieldDescription.KrimPrincipalIntegrationTestFields()),
         		         		 
         		         		 PayloadDocumentation.relaxedResponseFields(
         		         				 beneathPath("findAllActionItems.").withSubsectionId("KrimGroupTable"),
-        		         				 FieldDescription.KrimPrincipalIntegrationTestFields())
+        		         				 FieldDescription.KrimGroupIntegrationTestFields())
         		 
         		 ) )
          ;
@@ -166,25 +166,82 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		String query ="{ "
 				+ "findActionItem ( id:\"aid10\" ) "
 				+ "{ "
+				+ "id "
 				+ "documentTypeLabel "
-				+ "} "
+				+ "documentTypeName "
+				+ "documentUrl "
+				+ "title "
+				+ "requestCode "
+				+ "requestLabel "
+				+ "routeLogUrl "
+				+ "creationDate "
+				
+				+ "group { "
+				+ "id "
+				+ "name "
+				+ "nameSpace "
+				+ "active "
+				+ "groupUrl "
+				+ "description "
+				+ "lastUpdateDate "
+				+ "}"
+				
+				+ "initiator { "
+				+ "universityId "
+				+ "networkId "
+				+ "defaultDisplayName "
+				+ "personUrl "
+				+ "active "
+				+ "lastUpdateDate "
+				+ "}"
+				
+				+ "document { "
+				+ "id "
+				+ "routeStatusCode "
+				+ "routeStatusLabel "
+				+ "lastApprovedDate"
+				+ " }"
+				+ " }"
 				+ "}"; 
 		
 		ResultActions postResult = performGraphQlPost(query);
-		
+
 		
 		 postResult.andExpect(status().isOk())
          .andExpect(jsonPath("$.errors").doesNotExist())
          .andDo(print())
+         .andExpect(jsonPath("$.findActionItem.id").value("aid10"))
          .andExpect(jsonPath("$.findActionItem.documentTypeLabel").value("credit card"))
+         .andExpect(jsonPath("$.findActionItem.documentTypeName").value("200"))
+         .andExpect(jsonPath("$.findActionItem.documentUrl").value("http://localhost:8080/workflow/documents/aid10"))
+         .andExpect(jsonPath("$.findActionItem.title").value("travis"))
+         .andExpect(jsonPath("$.findActionItem.requestCode").value("A"))
+         .andExpect(jsonPath("$.findActionItem.requestLabel").value("Approve"))
+         .andExpect(jsonPath("$.findActionItem.routeLogUrl").value("http://localhost:8080/workflow/documents/aid10/log"))
+         .andExpect(jsonPath("$.findActionItem.creationDate").value("2017-11-25T20:34:57Z"))
+         .andExpect(jsonPath("$.findActionItem.group.id").value("a1"))
+         .andExpect(jsonPath("$.findActionItem.group.name").value("nightwatchers"))
+         .andExpect(jsonPath("$.findActionItem.group.nameSpace").value("nmspc_grp1"))
+         .andExpect(jsonPath("$.findActionItem.group.active").value("Y"))
+         .andExpect(jsonPath("$.findActionItem.group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
+         .andExpect(jsonPath("$.findActionItem.group.description").value("Group working for UITS in OOSM course"))
+         .andExpect(jsonPath("$.findActionItem.group.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findActionItem.initiator.universityId").value("pid1"))
+         .andExpect(jsonPath("$.findActionItem.initiator.networkId").value("prncpl1"))
+         .andExpect(jsonPath("$.findActionItem.initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
+         .andExpect(jsonPath("$.findActionItem.initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
+         .andExpect(jsonPath("$.findActionItem.initiator.active").value("y"))
+         .andExpect(jsonPath("$.findActionItem.initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findActionItem.document.id").value("dhid2"))
+         .andExpect(jsonPath("$.findActionItem.document.routeStatusCode").value("S"))
+         .andExpect(jsonPath("$.findActionItem.document.routeStatusLabel").value("Saved"))
+         .andExpect(jsonPath("$.findActionItem.document.lastApprovedDate").value("2017-07-01T00:00:00Z"))
          .andDo(MockMvcRestDocumentation.document("{ClassName}/{methodName}",
-	         		
-         		 PayloadDocumentation.relaxedResponseFields(
-         				 beneathPath("findActionItem").withSubsectionId("KrewActionItemTable"),
-      				   PayloadDocumentation.fieldWithPath("documentTypeLabel")
-      				   .description("The Krew Action Item Document Type Label"))
 
- 
+         		 PayloadDocumentation.responseFields(
+         				 beneathPath("findActionItem.").withSubsectionId("KrewActionItemTable"),
+         				 FieldDescription.FindActionItemIntegrationTestFields())
+
         		 ) )
          ;
 		

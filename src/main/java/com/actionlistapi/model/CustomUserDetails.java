@@ -2,8 +2,9 @@ package com.actionlistapi.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
+
+// Implementation to provide a custom userdetails class to be used by spring auth module
 
 public class CustomUserDetails extends Principal implements UserDetails{
 

@@ -85,7 +85,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "lastUpdateDate "
 				+ "}"
 				
-				+ "initiator { "
+				+ "requestedOf { "
 				+ "universityId "
 				+ "networkId "
 				+ "defaultDisplayName "
@@ -125,12 +125,12 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findAllActionItems.[0].group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
          .andExpect(jsonPath("$.findAllActionItems.[0].group.description").value("Group working for UITS in OOSM course"))
          .andExpect(jsonPath("$.findAllActionItems.[0].group.lastUpdateDate").value("2018-02-13T17:45:13Z"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.universityId").value("pid1"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.networkId").value("prncpl1"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.active").value("y"))
-         .andExpect(jsonPath("$.findAllActionItems.[0].initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.universityId").value("pid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.networkId").value("prncpl1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.defaultDisplayName").value("Panchal, Sagar Suresh"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.personUrl").value("http://localhost:8080/identity/people/pid1"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.active").value("y"))
+         .andExpect(jsonPath("$.findAllActionItems.[0].requestedOf.lastUpdateDate").value("2018-02-13T17:45:13Z"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.id").value("dhid1"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusCode").value("I"))
          .andExpect(jsonPath("$.findAllActionItems.[0].document.routeStatusLabel").value("Initiated"))
@@ -186,7 +186,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "lastUpdateDate "
 				+ "}"
 				
-				+ "initiator { "
+				+ "requestedOf { "
 				+ "universityId "
 				+ "networkId "
 				+ "defaultDisplayName "
@@ -226,12 +226,12 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.findActionItem.group.groupUrl").value("http://localhost:8080/identity/groups/a1"))
          .andExpect(jsonPath("$.findActionItem.group.description").value("Group working for UITS in OOSM course"))
          .andExpect(jsonPath("$.findActionItem.group.lastUpdateDate").value("2018-02-13T17:45:13Z"))
-         .andExpect(jsonPath("$.findActionItem.initiator.universityId").value("pid1"))
-         .andExpect(jsonPath("$.findActionItem.initiator.networkId").value("prncpl1"))
-         .andExpect(jsonPath("$.findActionItem.initiator.defaultDisplayName").value("Panchal, Sagar Suresh"))
-         .andExpect(jsonPath("$.findActionItem.initiator.personUrl").value("http://localhost:8080/identity/people/pid1"))
-         .andExpect(jsonPath("$.findActionItem.initiator.active").value("y"))
-         .andExpect(jsonPath("$.findActionItem.initiator.lastUpdateDate").value("2018-02-13T17:45:13Z"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.universityId").value("pid1"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.networkId").value("prncpl1"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.defaultDisplayName").value("Panchal, Sagar Suresh"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.personUrl").value("http://localhost:8080/identity/people/pid1"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.active").value("y"))
+         .andExpect(jsonPath("$.findActionItem.requestedOf.lastUpdateDate").value("2018-02-13T17:45:13Z"))
          .andExpect(jsonPath("$.findActionItem.document.id").value("dhid2"))
          .andExpect(jsonPath("$.findActionItem.document.routeStatusCode").value("S"))
          .andExpect(jsonPath("$.findActionItem.document.routeStatusLabel").value("Saved"))
@@ -273,7 +273,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 				+ "lastUpdateDate "
 				+ "}"
 				
-				+ "initiator { "
+				+ "requestedOf { "
 				+ "universityId "
 				+ "networkId "
 				+ "defaultDisplayName "
@@ -307,12 +307,12 @@ public class ActionListApiApplicationTests extends TimeConfig{
          .andExpect(jsonPath("$.pageActionItems.[0].routeLogUrl").value("http://localhost:8080/workflow/documents/aid2/log"))
          .andExpect(jsonPath("$.pageActionItems.[0].creationDate").value("2018-02-13T00:29:40Z"))
          .andExpect(jsonPath("$.pageActionItems.[0].group").doesNotExist())
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.universityId").value("pid2"))
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.networkId").value("prncpl2"))
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.defaultDisplayName").doesNotExist())
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.personUrl").value("http://localhost:8080/identity/people/pid2"))
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.active").value("n"))
-         .andExpect(jsonPath("$.pageActionItems.[0].initiator.lastUpdateDate").value("2018-01-24T16:05:32Z"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.universityId").value("pid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.networkId").value("prncpl2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.defaultDisplayName").doesNotExist())
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.personUrl").value("http://localhost:8080/identity/people/pid2"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.active").value("n"))
+         .andExpect(jsonPath("$.pageActionItems.[0].requestedOf.lastUpdateDate").value("2018-01-24T16:05:32Z"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.id").value("dhid2"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusCode").value("S"))
          .andExpect(jsonPath("$.pageActionItems.[0].document.routeStatusLabel").value("Saved"))

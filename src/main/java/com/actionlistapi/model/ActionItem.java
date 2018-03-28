@@ -51,7 +51,7 @@ public class ActionItem implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
-	private Principal initiator;
+	private Principal requestedOf;
 
 //	@Column(name="DOC_HDR_ID", nullable=false, length=40)
 //	private String documentId;
@@ -144,12 +144,12 @@ public class ActionItem implements Serializable {
 		this.principalId = principalId;
 	}
 
-	public Principal getInitiator() {
-		return initiator;
+	public Principal getRequestedOf() {
+		return requestedOf;
 	}
 
-	public void setInitiator(Principal initiator) {
-		this.initiator = initiator;
+	public void setRequestedOf(Principal initiator) {
+		this.requestedOf = initiator;
 	}
 	
 //	public String getDocumentId() {

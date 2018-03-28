@@ -47,12 +47,12 @@ public class FieldDescription {
         				   PayloadDocumentation.fieldWithPath("document.routeStatusCode").description("Document Route Status Code"),
         				   PayloadDocumentation.fieldWithPath("document.routeStatusLabel").description("Document Route Status Label synchronous to the Route Status Code "),
         				   PayloadDocumentation.fieldWithPath("document.lastApprovedDate").type(GraphQLScalarType.class).description("Last Approved Date for Document"),
-        				   PayloadDocumentation.fieldWithPath("initiator.universityId").description("University Identifier for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("initiator.networkId").description("Network Identifier for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("initiator.defaultDisplayName").description("Default Display Name for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("initiator.personUrl").description("Person URL"),
-        				   PayloadDocumentation.fieldWithPath("initiator.active").description("Activity Status for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("initiator.lastUpdateDate").type(GraphQLScalarType.class).description("Last Updated Date"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.universityId").description("University Identifier for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.networkId").description("Network Identifier for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.defaultDisplayName").description("Default Display Name for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.personUrl").description("Person URL"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.active").description("Activity Status for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("requestedOf.lastUpdateDate").type(GraphQLScalarType.class).description("Last Updated Date"),
         				   PayloadDocumentation.fieldWithPath("group.id").description("Group Identifier"),
         				   PayloadDocumentation.fieldWithPath("group.name").description("Group Name corresponding to the Group Identifier"),
         				   PayloadDocumentation.fieldWithPath("group.nameSpace").description("Group Name Space corresponding to the Group Identifier"),
@@ -99,12 +99,12 @@ public class FieldDescription {
     	  
 		return new FieldDescriptor[]{
 
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.universityId").description("University Identifier for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.networkId").description("Network Identifier for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.defaultDisplayName").description("Default Display Name for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.personUrl").description("Person URL"),
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.active").description("Activity Status for the initiator"),
-        				   PayloadDocumentation.fieldWithPath("[0].initiator.lastUpdateDate").type(GraphQLScalarType.class).description("Last Updated Date")
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.universityId").description("University Identifier for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.networkId").description("Network Identifier for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.defaultDisplayName").description("Default Display Name for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.personUrl").description("Person URL"),
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.active").description("Activity Status for the requestedOf"),
+        				   PayloadDocumentation.fieldWithPath("[0].requestedOf.lastUpdateDate").type(GraphQLScalarType.class).description("Last Updated Date")
     
 		};
     }

@@ -45,6 +45,6 @@ type ActionItem{
 	requestLabel: String!
 	routeLogUrl: String!
 	group: Group
-	initiator: Principal
+	requestedOf: Principal
 	creationDate : Date!	
 }

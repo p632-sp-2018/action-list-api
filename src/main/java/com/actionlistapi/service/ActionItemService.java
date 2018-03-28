@@ -65,7 +65,7 @@ public class ActionItemService {
 
 	}
 	
-	String getAuthenticateUser() {		
+	String getAuthenticateUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		return name;

@@ -54,10 +54,13 @@ Use of HTTP status codes.
 | The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible.
 |===
 
+[[resources]]
+= Resources
+
+include::doc-findAllIntegrationTest.adoc[]
 
 
-[[overview-pagination]]
-=== Pagination
+include::doc-pageResultsIntegrationTest.adoc[]
 
 Spring pagination facilities offer following request parameters:
 
@@ -90,9 +93,4 @@ Pagination response has following structure:
 
 |===
 
-[[resources]]
-= Resources
-
-include::doc-findAllIntegrationTest.adoc[]
 include::doc-findOneIntegrationTest.adoc[]
-include::doc-pageResultsIntegrationTest.adoc[]

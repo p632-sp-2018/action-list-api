@@ -23,13 +23,6 @@ include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/htt
 Response body:
 include::{snippets}/ActionListApiApplicationTests/PageResultsIntegrationTest/response-body.adoc[]
 
-Some Basic Response fields:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewActionItemTable.adoc[]
 
-Response fields related to document:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewDocumentHeaderTable.adoc[]
-
-Response fields related to Person or Initiator:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimPrincipalTable.adoc[]
 
 

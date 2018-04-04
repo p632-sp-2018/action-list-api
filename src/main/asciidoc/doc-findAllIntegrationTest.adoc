@@ -23,14 +23,3 @@ include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/httpie-
 Response body:
 include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-body.adoc[]
 
-Some Basic Response fields:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewActionItemTable.adoc[]
-
-Response fields related to document:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewDocumentHeaderTable.adoc[]
-
-Response fields related to groups:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimGroupTable.adoc[]
-
-Response fields related to Person or Initiator:
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimPrincipalTable.adoc[]

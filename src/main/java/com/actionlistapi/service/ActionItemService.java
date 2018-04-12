@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.actionlistapi.model.ActionItem;
 import com.actionlistapi.model.EntityName;
 import com.actionlistapi.model.Principal;
+import com.actionlistapi.model.ActionItemFilter;
 import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -21,7 +22,9 @@ public class ActionItemService {
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllActionItems() {
+	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
+		System.out.println(filter.getDocumentTypeLabel());
+		System.out.println(filter.getRequestLabel());
 		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAllByPrincipalId(getAuthenticateUser());
 		for(ActionItem k : list ) {
 			setActionItem(k);
@@ -29,7 +32,7 @@ public class ActionItemService {
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter) {
 		Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
@@ -37,7 +40,7 @@ public class ActionItemService {
 		return kList;
 	}
 
-	public ActionItem findOneActionItem(String id) {
+	public ActionItem findOneActionItem(String id, ActionItemFilter filter) {
 		ActionItem k = actionItemRepository.findByIdAndPrincipalId(id, getAuthenticateUser());
 		setActionItem(k);
 		return k;

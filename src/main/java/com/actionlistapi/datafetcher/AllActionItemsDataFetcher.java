@@ -24,7 +24,6 @@ public class AllActionItemsDataFetcher implements DataFetcher<List<ActionItem>> 
 	public List<ActionItem> get(DataFetchingEnvironment environment) {
 		// TODO Auto-generated method stub
 		Map arguments = environment.getArguments();
-		ActionItemFilter filter = (ActionItemFilter) arguments.get("filter"); // Error persists here
-		return actionItemService.findAllActionItems(filter);
+		return actionItemService.findAllActionItems(actionItemService.mapArgumentsToFilterPojo((Map)arguments.get("filter")));
 	}
 }

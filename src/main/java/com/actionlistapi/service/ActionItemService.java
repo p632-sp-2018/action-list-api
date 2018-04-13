@@ -1,6 +1,7 @@
 package com.actionlistapi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -23,8 +24,6 @@ public class ActionItemService {
 	private ActionItemRepository actionItemRepository;
 
 	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
-		System.out.println(filter.getDocumentTypeLabel());
-		System.out.println(filter.getRequestLabel());
 		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAllByPrincipalId(getAuthenticateUser());
 		for(ActionItem k : list ) {
 			setActionItem(k);
@@ -93,6 +92,15 @@ public class ActionItemService {
 		defaultName += (e.getMiddleName() != null) ? " " + e.getMiddleName().trim() : "";
 		
 		return defaultName;
+	}
+	
+	// Map the schema filter fields with the POJO of ActionItemFilter fields
+	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
+		ActionItemFilter filter = new ActionItemFilter();
+		filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+		filter.setRequestLabel((String)arguments.get("requestLabel"));
+		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		return filter;
 	}
 	
 }

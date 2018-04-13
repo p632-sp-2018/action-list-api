@@ -24,8 +24,7 @@ public class PageActionItemDataFetcher implements DataFetcher<Iterable<ActionIte
 		Map arguments = environment.getArguments();
 		int offset = (int) arguments.get("offset");
 		int limit = (int) arguments.get("limit");
-		ActionItemFilter filter = (ActionItemFilter) arguments.get("filter"); // Error persists here
-		return actionItemService.findAllPagedActionItems(offset,limit,filter);
+		return actionItemService.findAllPagedActionItems(offset,limit,actionItemService.mapArgumentsToFilterPojo((Map)arguments.get("filter")));
 		 
 	}
 

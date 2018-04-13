@@ -23,8 +23,7 @@ public class ActionItemDataFetcher implements DataFetcher<ActionItem> {
 		// TODO Auto-generated method stub
 		Map arguments = environment.getArguments();
 		String id = (String)arguments.get("id");
-		ActionItemFilter filter = (ActionItemFilter) arguments.get("filter"); // Error persists here
-		return actionItemService.findOneActionItem(id,filter);
+		return actionItemService.findOneActionItem(id,actionItemService.mapArgumentsToFilterPojo((Map)arguments.get("filter")));
 	}
 
 }

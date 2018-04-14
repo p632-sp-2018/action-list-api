@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  db:
+    image: "mysql:5.7.20"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: actionapi
+      MYSQL_USER: actionapi
+      MYSQL_PASSWORD: changeme
+  app:
+    image: "one7/actionapi:v3"
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/actionapi
+      SPRING_DATASOURCE_USERNAME: actionapi
+      SPRING_DATASOURCE_PASSWORD: changeme

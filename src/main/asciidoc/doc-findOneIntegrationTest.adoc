@@ -23,5 +23,5 @@ include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/httpie-
 Response body:
 include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/response-body.adoc[]
 
-Response fields for Krew Action Item Table - KrewActnItmT :
+Response fields Table:
 include::{snippets}/ActionListApiApplicationTests/findOneIntegrationTest/response-fields-KrewActionItemTable.adoc[]

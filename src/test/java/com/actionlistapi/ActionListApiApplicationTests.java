@@ -64,7 +64,9 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@WithMockUser(username="pid1",roles="USER")
 	public void findAllIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "findAllActionItems { "
+				+ "findAllActionItems (filter: {\r\n" + 
+				"	\r\n" + 
+				"	}) { "
 				+ "id "
 				+ "documentTypeLabel "
 				+ "documentTypeName "
@@ -164,7 +166,9 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@WithMockUser(username="pid1",roles="USER")
 	public void findOneIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "findActionItem ( id:\"aid10\" ) "
+				+ "findActionItem ( id:\"aid10\", filter: {\r\n" + 
+				"	\r\n" + 
+				"	})"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "
@@ -251,7 +255,10 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@WithMockUser(username="pid2",roles="USER")
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
-				+ "pageActionItems ( offset: 0, limit: 1 )"
+
+				+ "pageActionItems ( offset: 0, limit: 1, filter: {\r\n" + 
+				"	\r\n" + 
+				"	})"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "

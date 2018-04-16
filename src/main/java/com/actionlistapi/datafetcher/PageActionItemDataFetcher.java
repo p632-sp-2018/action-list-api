@@ -10,6 +10,7 @@ import com.actionlistapi.service.ActionItemService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import com.actionlistapi.model.ActionItemFilter;
 
 @Component
 public class PageActionItemDataFetcher implements DataFetcher<Iterable<ActionItem>>{
@@ -23,7 +24,7 @@ public class PageActionItemDataFetcher implements DataFetcher<Iterable<ActionIte
 		Map arguments = environment.getArguments();
 		int offset = (int) arguments.get("offset");
 		int limit = (int) arguments.get("limit");
-		return actionItemService.findAllPagedActionItems(offset,limit);
+		return actionItemService.findAllPagedActionItems(offset,limit,actionItemService.mapArgumentsToFilterPojo((Map)arguments.get("filter")));
 		 
 	}
 

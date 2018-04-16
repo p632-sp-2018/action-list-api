@@ -73,7 +73,7 @@ public class QueryController {
 				.type("Query", typeWiring -> typeWiring
 						.dataFetcher("findAllActionItems", allActionItemsDataFetcher)
 						.dataFetcher("findActionItem", actionItemDataFetcher)
-						.dataFetcher("pageActionItem", pageActionItemDataFetcher))
+						.dataFetcher("pageActionItems", pageActionItemDataFetcher))
 						.scalar(Date)
 						
 				.build();

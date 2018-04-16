@@ -1,4 +1,4 @@
-== Test case Document for Retrieving all Items -findAllIntegrationTest Document
+== Test case Document for Retrieving all Items 
 
 
 Example of curl command:
@@ -23,14 +23,3 @@ include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/httpie-
 Response body:
 include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-body.adoc[]
 
-Response fields for Krew Action Item Table - KrewActnItmT :
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewActionItemTable.adoc[]
-
-Response fields for Krew Document Header Table - KrewDocHdrT :
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrewDocumentHeaderTable.adoc[]
-
-Response fields for Krim Group Table - KrimGrpT :
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimGroupTable.adoc[]
-
-Response fields for Krim Principal Table - KrimPrncplT :
-include::{snippets}/ActionListApiApplicationTests/findAllIntegrationTest/response-fields-KrimPrincipalTable.adoc[]

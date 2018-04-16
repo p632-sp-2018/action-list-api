@@ -1,6 +1,7 @@
 package com.actionlistapi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.actionlistapi.model.ActionItem;
+import com.actionlistapi.model.ActionItemFilter;
+import com.actionlistapi.model.ActionSpecification;
 import com.actionlistapi.model.EntityName;
 import com.actionlistapi.model.Principal;
 import com.actionlistapi.repository.ActionItemRepository;
@@ -21,23 +24,29 @@ public class ActionItemService {
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllActionItems() {
-		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAllByPrincipalId(getAuthenticateUser());
+	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
+		setFilterDetails(filter);
+		ActionSpecification as = new ActionSpecification(filter);
+		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll(as);
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
-		Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),new PageRequest(offset,limit));
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter) {
+		setFilterDetails(filter);
+		ActionSpecification as = new ActionSpecification(filter);
+	//	Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),as,new PageRequest(offset,limit));
+		
+		Iterable<ActionItem> kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}
 		return kList;
 	}
 
-	public ActionItem findOneActionItem(String id) {
+	public ActionItem findOneActionItem(String id, ActionItemFilter filter) {
 		ActionItem k = actionItemRepository.findByIdAndPrincipalId(id, getAuthenticateUser());
 		setActionItem(k);
 		return k;
@@ -90,6 +99,25 @@ public class ActionItemService {
 		defaultName += (e.getMiddleName() != null) ? " " + e.getMiddleName().trim() : "";
 		
 		return defaultName;
+	}
+	
+	// Map the schema filter fields with the POJO of ActionItemFilter fields
+	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
+		ActionItemFilter filter = new ActionItemFilter();
+		filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+		filter.setRequestLabel((String)arguments.get("requestLabel"));
+		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		return filter;
+	}
+
+	void setFilterDetails(ActionItemFilter filter) {
+		filter.setUserId(getAuthenticateUser());
+		if(filter.getRequestLabel() != null) {
+			filter.setRequestCode(ActionListUtil.getRequestCode(filter.getRequestLabel()));
+		}
+		if(filter.getRouteStatusLabel() != null) {
+			filter.setRouteStatusCode(ActionListUtil.getRouteStatusCode(filter.getRouteStatusLabel()));
+		}
 	}
 	
 }

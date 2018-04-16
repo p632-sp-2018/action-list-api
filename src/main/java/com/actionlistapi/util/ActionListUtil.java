@@ -13,4 +13,11 @@ public final class ActionListUtil {
 		return DocumentStatus.fromCode(routeStatusCode).getLabel();
 	}
 	
+	public static String getRequestCode(String requestCodeLabel) {
+		return ActionType.fromLabel(requestCodeLabel).getCode();
+	}
+	
+	public static String getRouteStatusCode(String routeStatusLabel) {
+		return DocumentStatus.fromLabel(routeStatusLabel).getCode();
+	}
 }

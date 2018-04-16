@@ -129,6 +129,12 @@ public enum ActionType {
 			return label;
 		}
 		
+		
+		public String getCode() {
+			return code;
+		}
+		
+		
 		public static ActionType fromCode(String code) {
 			return fromCode(code, false);
 		}

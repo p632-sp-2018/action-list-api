@@ -10,6 +10,7 @@ import com.actionlistapi.service.ActionItemService;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
+import com.actionlistapi.model.ActionItemFilter;
 
 @Component
 public class ActionItemDataFetcher implements DataFetcher<ActionItem> {
@@ -21,7 +22,8 @@ public class ActionItemDataFetcher implements DataFetcher<ActionItem> {
 	public ActionItem get(DataFetchingEnvironment environment) {
 		// TODO Auto-generated method stub
 		Map arguments = environment.getArguments();
-		return actionItemService.findOneActionItem((String)arguments.get("id"));
+		String id = (String)arguments.get("id");
+		return actionItemService.findOneActionItem(id,actionItemService.mapArgumentsToFilterPojo((Map)arguments.get("filter")));
 	}
 
 }

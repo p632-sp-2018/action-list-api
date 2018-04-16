@@ -12,6 +12,8 @@ import com.actionlistapi.service.ActionItemService;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
+import com.actionlistapi.model.ActionItemFilter;
+
 @Component
 public class AllActionItemsDataFetcher implements DataFetcher<List<ActionItem>> {
 	

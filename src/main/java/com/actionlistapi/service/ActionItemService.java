@@ -109,7 +109,7 @@ public class ActionItemService {
 		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
 		return filter;
 	}
-	
+
 	void setFilterDetails(ActionItemFilter filter) {
 		filter.setUserId(getAuthenticateUser());
 		if(filter.getRequestLabel() != null) {

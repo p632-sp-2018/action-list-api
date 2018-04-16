@@ -9,13 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import com.actionlistapi.model.ActionItem;
-import com.actionlistapi.model.ActionSpecification;
-
 
 
 public interface ActionItemRepository extends JpaRepository<ActionItem,String>, JpaSpecificationExecutor<ActionItem>{
-	
-	List<ActionItem> findAllByPrincipalId(String principalId, ActionSpecification as);
-	Page<ActionItem> findAllByPrincipalId(String principalId, ActionSpecification as, Pageable page );
+	List<ActionItem> findAllByPrincipalId(String principalId);
+	Page<ActionItem> findAllByPrincipalId(String principalId, Pageable page );
 	ActionItem findByIdAndPrincipalId(String id, String principalId);
 }

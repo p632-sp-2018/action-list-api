@@ -255,6 +255,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 	@WithMockUser(username="pid2",roles="USER")
 	public void PageResultsIntegrationTest() throws Exception {
 		String query ="{ "
+
 				+ "pageActionItems ( offset: 0, limit: 1, filter: {\r\n" + 
 				"	\r\n" + 
 				"	})"

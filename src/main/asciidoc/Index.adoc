@@ -1,0 +1,98 @@
+= API Documentation
+:doctype: book
+:compat-mode:
+:page-layout!:
+:toc: left
+:toclevels: 4
+:sectanchors:
+:sectlinks:
+:sectnums:
+:linkattrs:
+:source-highlighter: highlightjs
+
+
+[[overview]]
+= Overview
+
+[[overview-general]]
+== General
+
+[[overview-http-verbs]]
+=== HTTP verbs
+Standard HTTP and REST conventions.
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+|===
+
+[[overview-http-status-codes]]
+=== HTTP status codes
+Use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request, the response will contain an entity describing or containing the result of the action.
+
+| `201 Created`
+| The request has been fulfilled and resulted in a new resource being created.
+
+| `204 No Content`
+| The server successfully processed the request, but is not returning any content.
+
+| `400 Bad Request`
+| The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).
+
+| `404 Not Found`
+| The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible.
+|===
+
+
+
+[[overview-pagination]]
+=== Pagination
+
+Spring pagination facilities offer following request parameters:
+
+.Request parameters
+|===
+| Path | Type | Optional | Description
+
+| offset
+| Integer
+| false
+| Page you want to retrieve, 0 indexed and no default value set.
+
+| limit
+| Integer
+| false
+| Size of the page you want to retrieve, no default value set.
+
+|===
+
+Pagination response has following structure:
+
+.Response structure
+|===
+| Path | Type | Optional | Description
+
+| content
+| Array[Object]
+| false
+| Actual items.
+
+|===
+
+[[resources]]
+= Resources
+
+include::doc-findAllIntegrationTest.adoc[]
+include::doc-findOneIntegrationTest.adoc[]
+include::doc-pageResultsIntegrationTest.adoc[]

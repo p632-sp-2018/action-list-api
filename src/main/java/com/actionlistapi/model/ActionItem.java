@@ -46,12 +46,12 @@ public class ActionItem implements Serializable {
 	@JoinColumn(name="GRP_ID")
 	private Group group;
 
-//	@Column(name="PRNCPL_ID", updatable=false)
-//	private String principalId;
+	@Column(name="PRNCPL_ID", updatable=false, insertable=false)
+	private String principalId;
 
 	@ManyToOne
 	@JoinColumn(name="PRNCPL_ID")
-	private Principal initiator;
+	private Principal requestedOf;
 
 //	@Column(name="DOC_HDR_ID", nullable=false, length=40)
 //	private String documentId;
@@ -136,20 +136,20 @@ public class ActionItem implements Serializable {
 		this.group = group;
 	}
 
-//	public String getPrncplId() {
-//		return this.principalId;
-//	}
-
-//	public void setPrncplId(String principalId) {
-//		this.principalId = principalId;
-//	}
-
-	public Principal getInitiator() {
-		return initiator;
+	public String getPrincipalId() {
+		return this.principalId;
 	}
 
-	public void setInitiator(Principal initiator) {
-		this.initiator = initiator;
+	public void setPrincipalId(String principalId) {
+		this.principalId = principalId;
+	}
+
+	public Principal getRequestedOf() {
+		return requestedOf;
+	}
+
+	public void setRequestedOf(Principal initiator) {
+		this.requestedOf = initiator;
 	}
 	
 //	public String getDocumentId() {

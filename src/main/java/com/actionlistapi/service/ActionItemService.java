@@ -1,6 +1,7 @@
 package com.actionlistapi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -9,7 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.actionlistapi.model.ActionItem;
+import com.actionlistapi.model.ActionItemFilter;
+import com.actionlistapi.model.ActionSpecification;
 import com.actionlistapi.model.EntityName;
+import com.actionlistapi.model.Principal;
 import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -20,51 +24,53 @@ public class ActionItemService {
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllActionItems() {
-		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll();
+	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
+		setFilterDetails(filter);
+		ActionSpecification as = new ActionSpecification(filter);
+		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll(as);
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
-		Iterable<ActionItem> kList =  actionItemRepository.findAll(new PageRequest(offset,limit));
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter) {
+		setFilterDetails(filter);
+		ActionSpecification as = new ActionSpecification(filter);
+	//	Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),as,new PageRequest(offset,limit));
+		
+		Iterable<ActionItem> kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}
 		return kList;
 	}
 
-	public ActionItem findOneActionItem(String id) {
-		ActionItem k = actionItemRepository.findOne(id);
+	public ActionItem findOneActionItem(String id, ActionItemFilter filter) {
+		ActionItem k = actionItemRepository.findByIdAndPrincipalId(id, getAuthenticateUser());
 		setActionItem(k);
 		return k;
-
 	} 
 	
 	void setActionItem(ActionItem k ) {
+//		Implemented to set the Request Label of of ActionItem object
 		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
+		
+//		Implemented to set the Route Log URL of of ActionItem object
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
 		
-		// Implemented to set the groupUrl in the KrimGrpT / group 
+//		Implemented to set the groupUrl in the Group object 
 		if(k.getGroup() != null)
 			k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
 		
-		// Implemented to set the personUrl inside KrimPrncplT / initiator
-		k.getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
-		//k.getDocument().getInitiator().setPersonUrl(ActionListConstants.PERSON_URL + k.getInitiator().getUniversityId());
-		
-		// Implemented to set the entity details in KrimPrncplT pojo
-		EntityName e = k.getInitiator().getEntity();
-		if (e.getDefaultIndicator().equalsIgnoreCase("N") || e.getActiveIndicator().equalsIgnoreCase("N")) {
-			k.getInitiator().setDefaultDisplayName(null);
-		}
-		else {
-			k.getInitiator().setDefaultDisplayName(e.getLastName() + ", " + e.getFirstName() + " " + e.getMiddleName());
-		}
-		
+//		Implemented to set the routeStatusLabel of the Document object
 		k.getDocument().setRouteStatusLabel(ActionListUtil.getRouteStatusLabel(k.getDocument().getRouteStatusCode()));
+		
+//		Implemented to set the Principal(requestedOf) Details of the ActionItem object
+		setPrincipalDetails(k.getRequestedOf());
+	
+//		Implemented to set the Principal(initiator) Details of the Document object
+		setPrincipalDetails(k.getDocument().getInitiator());
 
 	}
 	
@@ -72,6 +78,46 @@ public class ActionItemService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		return name;
+	}
+	
+	void setPrincipalDetails(Principal p) {
+		p.setPersonUrl(ActionListConstants.PERSON_URL + p.getUniversityId());
+		EntityName e = p.getEntity();
+		if (e.getDefaultIndicator().equalsIgnoreCase("N") || e.getActiveIndicator().equalsIgnoreCase("N")) {
+			p.setDefaultDisplayName(null);
+		}
+		else {
+			p.setDefaultDisplayName(getDefaultName(e));
+		}
+	}
+	
+	String getDefaultName(EntityName e) {
+		String defaultName;
+		
+		defaultName = (e.getLastName() != null) ? e.getLastName().trim() + ", " : "";
+		defaultName += (e.getFirstName() != null) ? e.getFirstName().trim(): "";
+		defaultName += (e.getMiddleName() != null) ? " " + e.getMiddleName().trim() : "";
+		
+		return defaultName;
+	}
+	
+	// Map the schema filter fields with the POJO of ActionItemFilter fields
+	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
+		ActionItemFilter filter = new ActionItemFilter();
+		filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+		filter.setRequestLabel((String)arguments.get("requestLabel"));
+		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		return filter;
+	}
+	
+	void setFilterDetails(ActionItemFilter filter) {
+		filter.setUserId(getAuthenticateUser());
+		if(filter.getRequestLabel() != null) {
+			filter.setRequestCode(ActionListUtil.getRequestCode(filter.getRequestLabel()));
+		}
+		if(filter.getRouteStatusLabel() != null) {
+			filter.setRouteStatusCode(ActionListUtil.getRouteStatusCode(filter.getRouteStatusLabel()));
+		}
 	}
 	
 }

@@ -2,9 +2,15 @@
 scalar Date
 
 type Query {
-	findAllActionItems : [ActionItem]
-	findActionItem(id: String):ActionItem!
-	pageActionItem(offset: Int!, limit: Int! ):[ActionItem]
+	findAllActionItems (filter: ActionItemFilter) : [ActionItem]
+	findActionItem(id: String, filter: ActionItemFilter):ActionItem!
+	pageActionItems(offset: Int!, limit: Int!, filter: ActionItemFilter):[ActionItem]
+}
+
+input ActionItemFilter {
+	documentTypeLabel: String
+	routeStatusLabel: String
+	requestLabel: String
 }
 
 type Document{
@@ -45,6 +51,6 @@ type ActionItem{
 	requestLabel: String!
 	routeLogUrl: String!
 	group: Group
-	initiator: Principal
+	requestedOf: Principal
 	creationDate : Date!	
 }

@@ -3,7 +3,7 @@ scalar Date
 
 type Query {
 	findAllActionItems (filter: ActionItemFilter) : [ActionItem]
-	findActionItem(id: String, filter: ActionItemFilter):ActionItem!
+	findActionItem(id: String!, filter: ActionItemFilter):ActionItem!
 	pageActionItems(offset: Int!, limit: Int!, filter: ActionItemFilter):[ActionItem]
 }
 

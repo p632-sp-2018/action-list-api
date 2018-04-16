@@ -13,12 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.actionlistapi.ActionListApiApplication;
+import com.actionlistapi.TimeConfig;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= {ActionListApiApplication.class})
 @TestPropertySource("classpath:application-test.properties")
 @WebAppConfiguration
-public class CustomUserDetailsServiceTest {
+public class CustomUserDetailsServiceTest extends TimeConfig{
 	
 //	@Autowired
 //    private PrincipalRepository principalRepository;

@@ -19,6 +19,7 @@ To get the project up and running on local machine follow the steps mentioned [h
 * [Code Climate](https://codeclimate.com/) - Code quality tool
 * [GitHub Flow](https://guides.github.com/introduction/flow/) - GitHub workflow followed
 * [Postman](https://www.getpostman.com/) - Request and response monitoring tool
+* [SprintRestDocs](https://projects.spring.io/spring-restdocs/) - Automated Documentation Tool
 
 ## Contributing
 

@@ -1,10 +1,12 @@
 package com.actionlistapi.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ public class ActionItemService {
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
+		Collections.sort(list);
 		return list;
 	}
 
@@ -39,7 +42,7 @@ public class ActionItemService {
 		ActionSpecification as = new ActionSpecification(filter);
 	//	Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),as,new PageRequest(offset,limit));
 		
-		Iterable<ActionItem> kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
+		Iterable<ActionItem> kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit, Sort.Direction.DESC, "creationDate"));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}

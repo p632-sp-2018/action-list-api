@@ -39,7 +39,7 @@ public class ActionItemService {
 		return kList;
 	}
 
-	public ActionItem findOneActionItem(String id, ActionItemFilter filter) {
+	public ActionItem findOneActionItem(String id) {
 		ActionItem k = actionItemRepository.findByIdAndPrincipalId(id, getAuthenticateUser());
 		setActionItem(k);
 		return k;
@@ -97,9 +97,11 @@ public class ActionItemService {
 	// Map the schema filter fields with the POJO of ActionItemFilter fields
 	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
 		ActionItemFilter filter = new ActionItemFilter();
-		filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
-		filter.setRequestLabel((String)arguments.get("requestLabel"));
-		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		if(arguments != null) {
+			filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+			filter.setRequestLabel((String)arguments.get("requestLabel"));
+			filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		}
 		return filter;
 	}
 	

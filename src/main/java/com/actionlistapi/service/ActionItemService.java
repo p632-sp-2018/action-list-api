@@ -1,6 +1,7 @@
 package com.actionlistapi.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.actionlistapi.model.ActionItem;
 import com.actionlistapi.model.EntityName;
 import com.actionlistapi.model.Principal;
+import com.actionlistapi.model.ActionItemFilter;
 import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -21,7 +23,7 @@ public class ActionItemService {
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllActionItems() {
+	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
 		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAllByPrincipalId(getAuthenticateUser());
 		for(ActionItem k : list ) {
 			setActionItem(k);
@@ -29,7 +31,7 @@ public class ActionItemService {
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit) {
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter) {
 		Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),new PageRequest(offset,limit));
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
@@ -90,6 +92,17 @@ public class ActionItemService {
 		defaultName += (e.getMiddleName() != null) ? " " + e.getMiddleName().trim() : "";
 		
 		return defaultName;
+	}
+	
+	// Map the schema filter fields with the POJO of ActionItemFilter fields
+	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
+		ActionItemFilter filter = new ActionItemFilter();
+		if(arguments != null) {
+			filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+			filter.setRequestLabel((String)arguments.get("requestLabel"));
+			filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		}
+		return filter;
 	}
 	
 }

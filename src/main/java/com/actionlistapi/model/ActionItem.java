@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="KREW_ACTN_ITM_T")
-public class ActionItem implements Serializable, Comparable<ActionItem> {
+public class ActionItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -71,11 +71,6 @@ public class ActionItem implements Serializable, Comparable<ActionItem> {
 	private String routeLogUrl;
 
 	public ActionItem() {
-	}
-
-	@Override
-	public int compareTo(@NotNull ActionItem o) {
-		return o.getCreationDate().compareTo(getCreationDate());
 	}
 
 	public String getId() {

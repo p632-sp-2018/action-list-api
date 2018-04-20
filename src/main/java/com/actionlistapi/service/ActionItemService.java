@@ -1,19 +1,17 @@
 package com.actionlistapi.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.actionlistapi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.actionlistapi.model.ActionItem;
-import com.actionlistapi.model.ActionItemFilter;
-import com.actionlistapi.model.ActionSpecification;
-import com.actionlistapi.model.EntityName;
-import com.actionlistapi.model.Principal;
 import com.actionlistapi.repository.ActionItemRepository;
 import com.actionlistapi.util.ActionListConstants;
 import com.actionlistapi.util.ActionListUtil;
@@ -24,22 +22,45 @@ public class ActionItemService {
 	@Autowired
 	private ActionItemRepository actionItemRepository;
 
-	public List<ActionItem> findAllActionItems(ActionItemFilter filter) {
+	public List<ActionItem> findAllActionItems(ActionItemFilter filter, CustomSort customSort) {
 		setFilterDetails(filter);
 		ActionSpecification as = new ActionSpecification(filter);
-		List<ActionItem> list = (List<ActionItem>) actionItemRepository.findAll(as);
+		List<ActionItem> list;
+		Sort sort;
+		if(customSort.getOrderBy() == null)
+			list = (List<ActionItem>) actionItemRepository.findAll(as);
+		else {
+			System.out.println(customSort.getDirection() + " " + customSort.getOrderBy());
+			if ("ASC".equalsIgnoreCase(customSort.getDirection())) {
+
+				sort = new Sort(new Sort.Order(Sort.Direction.ASC, customSort.getOrderBy()));
+			}
+			else
+				sort = new Sort(new Sort.Order(Sort.Direction.DESC, customSort.getOrderBy()));
+			    list = (List<ActionItem>) actionItemRepository.findAll(as, sort);
+		}
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
 		return list;
 	}
 
-	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter) {
+	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter, CustomSort customSort) {
 		setFilterDetails(filter);
 		ActionSpecification as = new ActionSpecification(filter);
-	//	Iterable<ActionItem> kList =  actionItemRepository.findAllByPrincipalId(getAuthenticateUser(),as,new PageRequest(offset,limit));
-		
-		Iterable<ActionItem> kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
+		Iterable<ActionItem> kList;
+	    Sort sort;
+		if(customSort.getOrderBy() == null)
+			kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
+		else{
+			System.out.println(customSort.getDirection() + " " + customSort.getOrderBy());
+			if ("ASC".equalsIgnoreCase(customSort.getDirection()))
+				sort = new Sort(new Sort.Order(Sort.Direction.ASC, customSort.getOrderBy()));
+			else
+				sort = new Sort(new Sort.Order(Sort.Direction.DESC, customSort.getOrderBy()));
+			kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit,sort));
+		}
+
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}
@@ -108,6 +129,14 @@ public class ActionItemService {
 		filter.setRequestLabel((String)arguments.get("requestLabel"));
 		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
 		return filter;
+	}
+
+	// Map the schema filter fields with the POJO of ActionItemFilter fields
+	public CustomSort mapArgumentsToCustomSortPojo (Map arguments) {
+		CustomSort customSort = new CustomSort();
+		customSort.setDirection((String)arguments.get("direction"));
+		customSort.setOrderBy((String)arguments.get("orderBy"));
+		return customSort;
 	}
 
 	void setFilterDetails(ActionItemFilter filter) {

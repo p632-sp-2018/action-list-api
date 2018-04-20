@@ -66,7 +66,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 		String query ="{ "
 				+ "findAllActionItems (filter: {\r\n" + 
 				"	\r\n" + 
-				"	}) { "
+				"	}, sort : {}) { "
 				+ "id "
 				+ "documentTypeLabel "
 				+ "documentTypeName "
@@ -258,7 +258,7 @@ public class ActionListApiApplicationTests extends TimeConfig{
 
 				+ "pageActionItems ( offset: 0, limit: 1, filter: {\r\n" + 
 				"	\r\n" + 
-				"	})"
+				"	}, sort : {})"
 				+ "{ "
 				+ "id "
 				+ "documentTypeLabel "

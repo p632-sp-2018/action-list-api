@@ -23,22 +23,12 @@ public class ActionItemService {
 	private ActionItemRepository actionItemRepository;
 
 	public List<ActionItem> findAllActionItems(ActionItemFilter filter, CustomSort customSort) {
-		setFilterDetails(filter);
 		ActionSpecification as = new ActionSpecification(filter);
+		Sort sort = setSortOrder(customSort);
+		
 		List<ActionItem> list;
-		Sort sort;
-		if(customSort.getOrderBy() == null)
-			list = (List<ActionItem>) actionItemRepository.findAll(as);
-		else {
-			System.out.println(customSort.getDirection() + " " + customSort.getOrderBy());
-			if ("ASC".equalsIgnoreCase(customSort.getDirection())) {
-
-				sort = new Sort(new Sort.Order(Sort.Direction.ASC, customSort.getOrderBy()));
-			}
-			else
-				sort = new Sort(new Sort.Order(Sort.Direction.DESC, customSort.getOrderBy()));
-			    list = (List<ActionItem>) actionItemRepository.findAll(as, sort);
-		}
+	    list = (List<ActionItem>) actionItemRepository.findAll(as, sort);
+	    
 		for(ActionItem k : list ) {
 			setActionItem(k);
 		}
@@ -46,21 +36,12 @@ public class ActionItemService {
 	}
 
 	public Iterable<ActionItem> findAllPagedActionItems(int offset, int limit, ActionItemFilter filter, CustomSort customSort) {
-		setFilterDetails(filter);
 		ActionSpecification as = new ActionSpecification(filter);
+		Sort sort = setSortOrder(customSort);
+		
 		Iterable<ActionItem> kList;
-	    Sort sort;
-		if(customSort.getOrderBy() == null)
-			kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit));
-		else{
-			System.out.println(customSort.getDirection() + " " + customSort.getOrderBy());
-			if ("ASC".equalsIgnoreCase(customSort.getDirection()))
-				sort = new Sort(new Sort.Order(Sort.Direction.ASC, customSort.getOrderBy()));
-			else
-				sort = new Sort(new Sort.Order(Sort.Direction.DESC, customSort.getOrderBy()));
-			kList =  actionItemRepository.findAll(as,new PageRequest(offset,limit,sort));
-		}
-
+		kList =  actionItemRepository.findAll(as, new PageRequest(offset,limit, sort));
+		
 		for(ActionItem kl : kList ) {
 			setActionItem(kl);
 		}
@@ -73,45 +54,38 @@ public class ActionItemService {
 		return k;
 	} 
 	
+	// Set some of the properties of ActionItem Pojo
 	void setActionItem(ActionItem k ) {
-//		Implemented to set the Request Label of of ActionItem object
-		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));
-		
-//		Implemented to set the Route Log URL of of ActionItem object
+		k.setRequestLabel(ActionListUtil.getRequestCodeLabel(k.getRequestCode()));		
 		k.setRouteLogUrl(k.getDocumentUrl()+ActionListConstants.ROUTE_LOG_URL);
+		k.getDocument().setRouteStatusLabel(ActionListUtil.getRouteStatusLabel(k.getDocument().getRouteStatusCode()));
+		setPrincipalDetails(k.getRequestedOf());
+		setPrincipalDetails(k.getDocument().getInitiator());
 		
-//		Implemented to set the groupUrl in the Group object 
 		if(k.getGroup() != null)
 			k.getGroup().setGroupUrl(ActionListConstants.GROUP_URL + k.getGroup().getId());
-		
-//		Implemented to set the routeStatusLabel of the Document object
-		k.getDocument().setRouteStatusLabel(ActionListUtil.getRouteStatusLabel(k.getDocument().getRouteStatusCode()));
-		
-//		Implemented to set the Principal(requestedOf) Details of the ActionItem object
-		setPrincipalDetails(k.getRequestedOf());
-	
-//		Implemented to set the Principal(initiator) Details of the Document object
-		setPrincipalDetails(k.getDocument().getInitiator());
-
 	}
 	
+	// Get the authenticated user details
 	String getAuthenticateUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		return name;
 	}
 	
+	
 	void setPrincipalDetails(Principal p) {
 		p.setPersonUrl(ActionListConstants.PERSON_URL + p.getUniversityId());
 		EntityName e = p.getEntity();
-		if (e.getDefaultIndicator().equalsIgnoreCase("N") || e.getActiveIndicator().equalsIgnoreCase("N")) {
-			p.setDefaultDisplayName(null);
+		if (e.getDefaultIndicator().equalsIgnoreCase("Y") && e.getActiveIndicator().equalsIgnoreCase("Y")) {
+			p.setDefaultDisplayName(getDefaultName(e));
 		}
 		else {
-			p.setDefaultDisplayName(getDefaultName(e));
+			p.setDefaultDisplayName(null);
 		}
 	}
 	
+	// Default name of the user to be displayed in the response
 	String getDefaultName(EntityName e) {
 		String defaultName;
 		
@@ -125,20 +99,16 @@ public class ActionItemService {
 	// Map the schema filter fields with the POJO of ActionItemFilter fields
 	public ActionItemFilter mapArgumentsToFilterPojo (Map arguments) {
 		ActionItemFilter filter = new ActionItemFilter();
-		filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
-		filter.setRequestLabel((String)arguments.get("requestLabel"));
-		filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));
+		if (arguments != null) {
+			filter.setDocumentTypeLabel((String)arguments.get("documentTypeLabel"));
+			filter.setRequestLabel((String)arguments.get("requestLabel"));
+			filter.setRouteStatusLabel((String)arguments.get("routeStatusLabel"));	
+		}
+		setFilterDetails(filter);
 		return filter;
 	}
-
-	// Map the schema filter fields with the POJO of ActionItemFilter fields
-	public CustomSort mapArgumentsToCustomSortPojo (Map arguments) {
-		CustomSort customSort = new CustomSort();
-		customSort.setDirection((String)arguments.get("direction"));
-		customSort.setOrderBy((String)arguments.get("orderBy"));
-		return customSort;
-	}
-
+	
+	// Set some more fields of the ActionItemFilter
 	void setFilterDetails(ActionItemFilter filter) {
 		filter.setUserId(getAuthenticateUser());
 		if(filter.getRequestLabel() != null) {
@@ -148,5 +118,30 @@ public class ActionItemService {
 			filter.setRouteStatusCode(ActionListUtil.getRouteStatusCode(filter.getRouteStatusLabel()));
 		}
 	}
+
+	// Map the schema sort fields with the POJO of CustomSort fields
+	public CustomSort mapArgumentsToCustomSortPojo (Map arguments) {
+		CustomSort customSort = new CustomSort();
+		if (arguments != null) {
+			customSort.setDirection((String)arguments.get("direction"));
+			customSort.setOrderBy((String)arguments.get("orderBy"));
+		}
+		return customSort;
+	}
 	
+	// Set the sort direction and the field on which the data is to be sorted 
+	private Sort setSortOrder(CustomSort customSort) {
+		Sort sort;
+		if(customSort.getDirection() != null && customSort.getOrderBy() != null) {
+			if ("ASC".equalsIgnoreCase(customSort.getDirection()))
+				sort = new Sort(new Sort.Order(Sort.Direction.ASC, customSort.getOrderBy()));
+			else
+				sort = new Sort(new Sort.Order(Sort.Direction.DESC, customSort.getOrderBy()));
+		}
+		else {
+			// Default: Sorting direction is in ascending order and on creationDate column
+			sort = new Sort(new Sort.Order(Sort.Direction.ASC, ActionListConstants.DEFAULT_SORT_FIELD));
+		}
+		return sort;
+	}	
 }

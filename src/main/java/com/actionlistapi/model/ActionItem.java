@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 /**
  * The persistent class for the KREW_ACTN_ITM_T database table.
@@ -17,7 +18,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name="KREW_ACTN_ITM_T")
-public class ActionItem implements Serializable {
+public class ActionItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id

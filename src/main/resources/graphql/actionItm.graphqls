@@ -2,9 +2,20 @@
 scalar Date
 
 type Query {
-	findAllActionItems : [ActionItem]
-	findActionItem(id: String):ActionItem!
-	pageActionItems(offset: Int!, limit: Int! ):[ActionItem]
+	findAllActionItems (filter: ActionItemFilter, sort: CustomSort) : [ActionItem]
+	findActionItem(id: String!):ActionItem!
+	pageActionItems(offset: Int!, limit: Int!, filter: ActionItemFilter, sort: CustomSort):[ActionItem]
+}
+
+input ActionItemFilter {
+	documentTypeLabel: String
+	routeStatusLabel: String
+	requestLabel: String
+}
+
+input CustomSort {
+	direction: String
+	orderBy: String
 }
 
 type Document{

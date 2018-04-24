@@ -39,6 +39,11 @@ public enum DocumentStatus {
 	public String getLabel() {
 		return label;
 	}
+	
+	public String getCode() {
+		return code;
+	}
+	
 
 	public static DocumentStatus fromCode(String code) {
 		if (code == null) {
@@ -51,6 +56,19 @@ public enum DocumentStatus {
 		}
 		throw new IllegalArgumentException("Failed to locate the DocumentStatus with the given code: " + code);
 	}
+	
+	
+	public static DocumentStatus fromLabel(String label) {
+        if (label == null) {
+            return null;
+        }
+        for (DocumentStatus status : values()) {
+            if (status.label.equals(label)) {
+                return status;
+            }
+        }
+        return null;
+    }
 
    
 }

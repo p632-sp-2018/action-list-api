@@ -11,7 +11,7 @@ services:
       MYSQL_USER: actionapi
       MYSQL_PASSWORD: changeme
   app:
-    image: "one7/actionapi:v3"
+    image: "one7/actionapi:v4"
     ports:
       - "8080:8080"
     environment:

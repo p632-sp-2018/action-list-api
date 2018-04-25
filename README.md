@@ -12,6 +12,11 @@ To get the project up and running on local machine follow the steps mentioned [h
 * [Spring Boot](https://projects.spring.io/spring-boot/) - Framework used
 * [GraphQL](http://graphql.org/) - API query language
 * [Maven](https://maven.apache.org/) - Build tool
+* [Liquibase](https://www.liquibase.org) - Database refactoring library.
+* [H2 Database](http://www.h2database.com/html/main.html) - Embedded Database used while testing
+* [MySQL](https://www.mysql.com) - Database used for runtime application.
+* [Spring REST Docs](https://projects.spring.io/spring-restdocs/) - Automated Documentation Tool
+* [Docker](https://www.docker.com) - Dockerize the API
  
 ## Other tools used
 
@@ -19,6 +24,7 @@ To get the project up and running on local machine follow the steps mentioned [h
 * [Code Climate](https://codeclimate.com/) - Code quality tool
 * [GitHub Flow](https://guides.github.com/introduction/flow/) - GitHub workflow followed
 * [Postman](https://www.getpostman.com/) - Request and response monitoring tool
+* [Curl](https://curl.haxx.se) - Command Line tool and library for transferring data with URLs.
 
 ## Contributing
 
